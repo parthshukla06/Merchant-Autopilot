@@ -5,7 +5,7 @@ const {
   buildMerchantIntelligence,
 } = require("../services/merchantIntelligenceEngine");
 const { generateAIExplanation } = require("../services/aiExplanationEngine");
-const { predictMerchantRisk } = require("../services/mlService");
+//const { calculateRiskScore } = require("../services/riskEngine");
 
 const express = require("express");
 const Merchant = require("../models/Merchant");
@@ -433,7 +433,23 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
       average_transaction_value: averageTransactionValue,
     };
 
-    const prediction = await predictMerchantRisk(features);
+    const prediction = calculateRiskScore({
+      chargebackRate,
+      refundRate,
+      rtoRate,
+      paymentSuccessRate:
+        transactionVolume > 0
+          ? ((transactionVolume - failedTransactions) / transactionVolume) * 100
+          : 100,
+      averageDailyRevenue:
+        transactionVolume > 0
+          ? transactions.reduce(
+              (total, transaction) => total + transaction.amount,
+              0,
+            ) / 14
+          : 0,
+      averageDailyExpenses: 0,
+    });
 
     res.status(200).json({
       success: true,
@@ -442,7 +458,9 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
         merchantId: merchant._id,
         businessName: merchant.businessName,
         features,
-        prediction: prediction.prediction,
+        prediction: prediction.level,
+        score: prediction.score,
+        reasons: prediction.reasons,
       },
     });
   } catch (error) {
