@@ -1796,3 +1796,316 @@ button {
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1) !important;
 }
 
+ 
+/* ==================================================
+   FINAL LIGHT MODE TEXT VISIBILITY
+================================================== */
+
+.analytics-section,
+.panel,
+.what-if-panel,
+.recommendations-panel {
+  color: #0f172a;
+}
+
+.analytics-section h1,
+.analytics-section h2,
+.analytics-section h3,
+.panel h1,
+.panel h2,
+.panel h3,
+.what-if-panel h1,
+.what-if-panel h2,
+.what-if-panel h3,
+.recommendations-panel h1,
+.recommendations-panel h2,
+.recommendations-panel h3 {
+  color: #0f172a;
+  opacity: 1;
+}
+
+.panel p,
+.panel span,
+.what-if-panel p,
+.what-if-panel span,
+.recommendations-panel p,
+.recommendations-panel span {
+  color: #475569;
+  opacity: 1;
+}
+
+.eyebrow {
+  color: #4f46e5 !important;
+  opacity: 1 !important;
+  font-weight: 700;
+}
+
+.analytics-card {
+  color: #0f172a;
+}
+
+.analytics-card h3 {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+.analytics-card-header span {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+.panel-header h2 {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+
+.panel-description {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode remains readable */
+
+.dark .analytics-section,
+.dark .panel,
+.dark .what-if-panel,
+.dark .recommendations-panel {
+  color: #f8fafc;
+}
+
+.dark .analytics-section h1,
+.dark .analytics-section h2,
+.dark .analytics-section h3,
+.dark .panel h1,
+.dark .panel h2,
+.dark .panel h3,
+.dark .what-if-panel h1,
+.dark .what-if-panel h2,
+.dark .what-if-panel h3,
+.dark .recommendations-panel h1,
+.dark .recommendations-panel h2,
+.dark .recommendations-panel h3 {
+  color: #f8fafc !important;
+}
+
+.dark .panel p,
+.dark .panel span,
+.dark .what-if-panel p,
+.dark .what-if-panel span,
+.dark .recommendations-panel p,
+.dark .recommendations-panel span {
+  color: #cbd5e1;
+}
+
+.dark .eyebrow {
+  color: #818cf8 !important;
+}
+
+ 
+/* ==================================================
+   FINAL LIGHT MODE WELCOME / BUSINESS NAME
+================================================== */
+
+.welcome h1 {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  font-weight: 800;
+}
+
+.welcome .summary {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
+.welcome .eyebrow {
+  color: #4f46e5 !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode */
+
+.dark .welcome h1 {
+  color: #f8fafc !important;
+}
+
+.dark .welcome .summary {
+  color: #cbd5e1 !important;
+}
+
+.dark .welcome .eyebrow {
+  color: #818cf8 !important;
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   FINAL LIGHT MODE TEXT FIX
+   ========================================= */
+
+.app:not(.dark) {
+  color: #0f172a;
+}
+
+.app:not(.dark) h1,
+.app:not(.dark) h2,
+.app:not(.dark) h3,
+.app:not(.dark) h4,
+.app:not(.dark) strong {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) p,
+.app:not(.dark) span {
+  color: #475569;
+}
+
+.app:not(.dark) .eyebrow {
+  color: #4f46e5 !important;
+}
+
+.app:not(.dark) .subtitle {
+  color: #64748b !important;
+}
+
+.app:not(.dark) .panel,
+.app:not(.dark) .analytics-card {
+  color: #0f172a;
+  background: #ffffff;
+}
+
+.app:not(.dark) .panel h2,
+.app:not(.dark) .panel h3,
+.app:not(.dark) .analytics-card h2,
+.app:not(.dark) .analytics-card h3 {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .panel p,
+.app:not(.dark) .panel span {
+  color: #475569;
+}
+
+.app:not(.dark) .analytics-header h2,
+.app:not(.dark) .analytics-card-header h3 {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .analytics-header p,
+.app:not(.dark) .analytics-card-header span {
+  color: #64748b !important;
+}
+
+.app:not(.dark) .recommendation h3,
+.app:not(.dark) .recommendation-title h3 {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .recommendation p {
+  color: #475569 !important;
+}
+
+.app:not(.dark) .insight-panel h2 {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .insight-box p {
+  color: #475569 !important;
+}
+
+.app:not(.dark) .scenario-summary strong {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .scenario-summary span {
+  color: #64748b !important;
+}
+
+.app:not(.dark) .metric-card h2,
+.app:not(.dark) .metric-card strong {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .metric-card p,
+.app:not(.dark) .metric-card span {
+  color: #64748b !important;
+}
+
+.app:not(.dark) .hero h1 {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .hero p {
+  color: #475569 !important;
+}
+
+/* Scenario result cards */
+.app:not(.dark) .scenario-card {
+  background: #ffffff;
+  border-color: #dbe2ea;
+}
+
+.app:not(.dark) .scenario-card h3,
+.app:not(.dark) .scenario-card strong {
+  color: #0f172a !important;
+}
+
+.app:not(.dark) .scenario-card p,
+.app:not(.dark) .scenario-card span {
+  color: #64748b !important;
+}
+
+
+/* Inputs */
+.app:not(.dark) input {
+  color: #f8fafc !important;
+  background: #0f172a !important;
+}
+
+
+/* =========================================
+   END LIGHT MODE FIX
+   ========================================= */
+
+
+/* =========================================
+   FINAL RISK DISTRIBUTION VISIBILITY FIX
+   ========================================= */
+
+.analytics-card > div[style*="padding"] span {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
+.analytics-card > div[style*="padding"] strong {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  font-weight: 800 !important;
+}
+
+/* Dark mode */
+.dark .analytics-card > div[style*="padding"] span {
+  color: #e2e8f0 !important;
+  opacity: 1 !important;
+}
+
+.dark .analytics-card > div[style*="padding"] strong {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  font-weight: 800 !important;
+}
+
+/* Risk bar labels */
+.analytics-card > div[style*="padding"] > div {
+  opacity: 1 !important;
+}
+
+/* Keep risk bars visible */
+.analytics-card > div[style*="padding"] > div > div:last-child {
+  opacity: 1 !important;
+}
+
