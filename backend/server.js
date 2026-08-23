@@ -25,6 +25,10 @@ const transactionRoutes = require("./routes/transaction.routes");
 
 app.use("/api/transactions", transactionRoutes);
 
+const whatIfRoutes = require("./routes/whatIf.routes");
+
+app.use("/api/merchants", whatIfRoutes);
+
 // Health Check
 app.get("/api/health", (req, res) => {
     res.status(200).json({
