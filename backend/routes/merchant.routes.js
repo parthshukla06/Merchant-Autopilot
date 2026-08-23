@@ -5,7 +5,6 @@ const {
   buildMerchantIntelligence,
 } = require("../services/merchantIntelligenceEngine");
 const { generateAIExplanation } = require("../services/aiExplanationEngine");
-//const { calculateRiskScore } = require("../services/riskEngine");
 
 const express = require("express");
 const Merchant = require("../models/Merchant");
@@ -359,6 +358,7 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
   try {
     const { merchantId } = req.params;
 
+    // Find merchant
     const merchant = await Merchant.findById(merchantId);
 
     if (!merchant) {
@@ -368,39 +368,58 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
       });
     }
 
+    // Find all transactions for this merchant
     const transactions = await Transaction.find({
       merchantId,
     });
 
     const transactionVolume = transactions.length;
 
+    // -----------------------------
+    // Transaction metrics
+    // -----------------------------
+
     const failedTransactions = transactions.filter(
-      (transaction) => transaction.transactionStatus === "failed",
+      (transaction) =>
+        transaction.transactionStatus === "failed"
     ).length;
 
     const rtoTransactions = transactions.filter(
-      (transaction) => transaction.isRTO === true,
+      (transaction) =>
+        transaction.isRTO === true
     ).length;
 
     const chargebackTransactions = transactions.filter(
-      (transaction) => transaction.isChargeback === true,
+      (transaction) =>
+        transaction.isChargeback === true
     ).length;
 
     const refundedTransactions = transactions.filter(
-      (transaction) => transaction.isRefunded === true,
+      (transaction) =>
+        transaction.isRefunded === true
     ).length;
 
     const codTransactions = transactions.filter(
-      (transaction) => transaction.isCOD === true,
+      (transaction) =>
+        transaction.isCOD === true
     ).length;
+
+    // -----------------------------
+    // Calculate rates
+    // -----------------------------
 
     const paymentFailureRate =
       transactionVolume > 0
         ? (failedTransactions / transactionVolume) * 100
         : 0;
 
+    const paymentSuccessRate =
+      100 - paymentFailureRate;
+
     const rtoRate =
-      transactionVolume > 0 ? (rtoTransactions / transactionVolume) * 100 : 0;
+      transactionVolume > 0
+        ? (rtoTransactions / transactionVolume) * 100
+        : 0;
 
     const chargebackRate =
       transactionVolume > 0
@@ -413,15 +432,22 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
         : 0;
 
     const codPercentage =
-      transactionVolume > 0 ? (codTransactions / transactionVolume) * 100 : 0;
+      transactionVolume > 0
+        ? (codTransactions / transactionVolume) * 100
+        : 0;
 
     const averageTransactionValue =
       transactionVolume > 0
         ? transactions.reduce(
-            (total, transaction) => total + transaction.amount,
-            0,
+            (total, transaction) =>
+              total + Number(transaction.amount || 0),
+            0
           ) / transactionVolume
         : 0;
+
+    // -----------------------------
+    // Features returned to frontend
+    // -----------------------------
 
     const features = {
       transaction_volume: transactionVolume,
@@ -433,40 +459,51 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
       average_transaction_value: averageTransactionValue,
     };
 
-    const prediction = calculateRiskScore({
+    // -----------------------------
+    // Calculate risk directly
+    // No Python ML service
+    // No localhost:8000
+    // -----------------------------
+
+    const riskResult = calculateRiskScore({
       chargebackRate,
       refundRate,
       rtoRate,
-      paymentSuccessRate:
-        transactionVolume > 0
-          ? ((transactionVolume - failedTransactions) / transactionVolume) * 100
-          : 100,
-      averageDailyRevenue:
-        transactionVolume > 0
-          ? transactions.reduce(
-              (total, transaction) => total + transaction.amount,
-              0,
-            ) / 14
-          : 0,
+      paymentSuccessRate,
+
+      // Keep cash-flow component neutral here.
+      // Risk is calculated from transaction behaviour.
+      averageDailyRevenue: 1,
       averageDailyExpenses: 0,
     });
 
-    res.status(200).json({
+    // -----------------------------
+    // Final response
+    // -----------------------------
+
+    return res.status(200).json({
       success: true,
       message: "Merchant ML risk predicted successfully",
+
       data: {
         merchantId: merchant._id,
         businessName: merchant.businessName,
+
         features,
-        prediction: prediction.level,
-        score: prediction.score,
-        reasons: prediction.reasons,
+
+        prediction: riskResult.level,
+        score: riskResult.score,
+        reasons: riskResult.reasons,
       },
     });
-  } catch (error) {
-    console.error("ML risk prediction error:", error.message);
 
-    res.status(500).json({
+  } catch (error) {
+    console.error(
+      "ML risk prediction error:",
+      error
+    );
+
+    return res.status(500).json({
       success: false,
       message: "Failed to predict merchant ML risk",
       error: error.message,
