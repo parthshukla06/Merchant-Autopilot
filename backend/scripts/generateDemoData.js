@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
 require("dotenv").config();
 
+const mongoose = require("mongoose");
+const Merchant = require("../models/Merchant");
 const Transaction = require("../models/Transaction");
 
 const MERCHANT_ID = "6a89dccdcc29ecf53a7612f3";
@@ -11,6 +12,31 @@ async function generateDemoData() {
 
         console.log("MongoDB connected");
 
+        // Create demo merchant if it does not exist
+        let merchant = await Merchant.findById(MERCHANT_ID);
+
+        if (!merchant) {
+            merchant = await Merchant.create({
+                _id: MERCHANT_ID,
+                businessName: "UrbanCart India",
+                businessType: "ecommerce",
+                city: "New Delhi",
+                state: "Delhi",
+                cashBalance: 250000,
+                averageDailyRevenue: 85000,
+                averageDailyExpenses: 60000,
+                paymentSuccessRate: 96,
+                refundRate: 3,
+                chargebackRate: 1,
+                rtoRate: 5,
+                status: "healthy"
+            });
+
+            console.log("Demo merchant created");
+        } else {
+            console.log("Demo merchant already exists");
+        }
+
         // Remove previous generated demo transactions
         await Transaction.deleteMany({
             merchantId: MERCHANT_ID,
@@ -18,7 +44,6 @@ async function generateDemoData() {
         });
 
         const transactions = [];
-
         const now = new Date();
 
         for (let day = 13; day >= 0; day--) {
@@ -51,7 +76,6 @@ async function generateDemoData() {
                 const random = Math.random();
 
                 if (isProblemPeriod) {
-                    // Problem period
                     if (random < 0.25) {
                         isRTO = true;
                         orderStatus = "returned";
@@ -66,7 +90,6 @@ async function generateDemoData() {
                         transactionStatus = "refunded";
                     }
                 } else {
-                    // Healthy period
                     if (random < 0.04) {
                         isRTO = true;
                         orderStatus = "returned";
@@ -95,7 +118,6 @@ async function generateDemoData() {
                             : "card",
 
                     transactionStatus,
-
                     orderStatus,
 
                     customerType:
@@ -106,9 +128,7 @@ async function generateDemoData() {
                     isCOD: Math.random() < 0.35,
 
                     isRTO,
-
                     isRefunded,
-
                     isChargeback,
 
                     processingFee:

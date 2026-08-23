@@ -1,28 +1,32 @@
-const axios = require("axios");
-
-const ML_SERVICE_URL = process.env.ML_SERVICE_URL || "http://localhost:8000";
+const { calculateRiskScore } = require("./riskEngine");
 
 async function predictMerchantRisk(features) {
-    try {
-        const response = await axios.post(
-            `${ML_SERVICE_URL}/predict`,
-            features,
-            {
-                timeout: 5000
-            }
-        );
+    const merchant = {
+        chargebackRate: features.chargeback_rate || 0,
 
-        return response.data;
-    } catch (error) {
-        console.error(
-            "ML service error:",
-            error.response?.data || error.message
-        );
+        refundRate: features.refund_rate || 0,
 
-        throw new Error("ML prediction service unavailable");
-    }
+        rtoRate: features.rto_rate || 0,
+
+        paymentSuccessRate:
+            100 - (features.payment_failure_rate || 0),
+
+        averageDailyRevenue:
+            (features.average_transaction_value || 0) *
+            (features.transaction_volume || 0),
+
+        averageDailyExpenses: 0,
+    };
+
+    const result = calculateRiskScore(merchant);
+
+    return {
+        prediction: result.level,
+        score: result.score,
+        reasons: result.reasons,
+    };
 }
 
 module.exports = {
-    predictMerchantRisk
+    predictMerchantRisk,
 };

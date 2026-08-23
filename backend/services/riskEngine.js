@@ -2,7 +2,7 @@ function calculateRiskScore(merchant) {
     let score = 0;
     const reasons = [];
 
-    // 1. Chargeback Risk
+    // Chargeback Risk
     if (merchant.chargebackRate >= 2) {
         score += 30;
         reasons.push("High chargeback rate");
@@ -11,7 +11,7 @@ function calculateRiskScore(merchant) {
         reasons.push("Elevated chargeback rate");
     }
 
-    // 2. Refund Risk
+    // Refund Risk
     if (merchant.refundRate >= 8) {
         score += 20;
         reasons.push("High refund rate");
@@ -20,7 +20,7 @@ function calculateRiskScore(merchant) {
         reasons.push("Elevated refund rate");
     }
 
-    // 3. RTO Risk
+    // RTO Risk
     if (merchant.rtoRate >= 20) {
         score += 25;
         reasons.push("Very high RTO rate");
@@ -32,7 +32,7 @@ function calculateRiskScore(merchant) {
         reasons.push("Elevated RTO rate");
     }
 
-    // 4. Payment Success Risk
+    // Payment Success Risk
     if (merchant.paymentSuccessRate < 85) {
         score += 20;
         reasons.push("Very low payment success rate");
@@ -41,22 +41,24 @@ function calculateRiskScore(merchant) {
         reasons.push("Low payment success rate");
     }
 
-    // 5. Cash Flow Risk
+    // Cash Flow Risk
     const dailyProfit =
-        merchant.averageDailyRevenue - merchant.averageDailyExpenses;
+        merchant.averageDailyRevenue -
+        merchant.averageDailyExpenses;
 
     if (dailyProfit < 0) {
         score += 25;
         reasons.push("Business is operating at a daily loss");
-    } else if (dailyProfit < merchant.averageDailyRevenue * 0.1) {
+    } else if (
+        dailyProfit <
+        merchant.averageDailyRevenue * 0.1
+    ) {
         score += 10;
         reasons.push("Very low daily profit margin");
     }
 
-    // Keep score between 0 and 100
     score = Math.min(score, 100);
 
-    // Determine risk level
     let level;
 
     if (score >= 70) {
@@ -70,10 +72,10 @@ function calculateRiskScore(merchant) {
     return {
         score,
         level,
-        reasons
+        reasons,
     };
 }
 
 module.exports = {
-    calculateRiskScore
+    calculateRiskScore,
 };
