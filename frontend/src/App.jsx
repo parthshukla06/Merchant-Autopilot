@@ -37,6 +37,9 @@ function App() {
   const [chargebackChangePercent, setChargebackChangePercent] = useState(-10);
 
   const [mlRisk, setMlRisk] = useState(null);
+  useEffect(() => {
+    console.log("ML RISK STATE:", mlRisk);
+  }, [mlRisk]);
 
   // Dark / Light mode
   const [darkMode, setDarkMode] = useState(() => {
@@ -264,7 +267,7 @@ function App() {
             <h2>{mlRisk?.prediction?.risk?.toUpperCase() || "N/A"}</h2>
 
             <span>
-              {mlRisk
+              {mlRisk?.prediction?.riskProbability !== undefined
                 ? `${Math.round(
                     mlRisk.prediction.riskProbability * 100,
                   )}% confidence`
@@ -273,7 +276,7 @@ function App() {
           </div>
         </section>
 
-{/* ==================================================
+        {/* ==================================================
     ISSUES + INSIGHT
 ================================================== */}
         {/* ==================================================
