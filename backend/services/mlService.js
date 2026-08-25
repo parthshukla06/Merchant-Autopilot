@@ -21,7 +21,10 @@ async function predictMerchantRisk(features) {
     const result = calculateRiskScore(merchant);
 
     return {
-        prediction: result.level,
+        prediction: {
+            risk: result.level,
+            riskProbability: result.score / 100,
+        },
         score: result.score,
         reasons: result.reasons,
     };

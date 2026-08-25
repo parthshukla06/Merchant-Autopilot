@@ -380,28 +380,23 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
     // -----------------------------
 
     const failedTransactions = transactions.filter(
-      (transaction) =>
-        transaction.transactionStatus === "failed"
+      (transaction) => transaction.transactionStatus === "failed",
     ).length;
 
     const rtoTransactions = transactions.filter(
-      (transaction) =>
-        transaction.isRTO === true
+      (transaction) => transaction.isRTO === true,
     ).length;
 
     const chargebackTransactions = transactions.filter(
-      (transaction) =>
-        transaction.isChargeback === true
+      (transaction) => transaction.isChargeback === true,
     ).length;
 
     const refundedTransactions = transactions.filter(
-      (transaction) =>
-        transaction.isRefunded === true
+      (transaction) => transaction.isRefunded === true,
     ).length;
 
     const codTransactions = transactions.filter(
-      (transaction) =>
-        transaction.isCOD === true
+      (transaction) => transaction.isCOD === true,
     ).length;
 
     // -----------------------------
@@ -413,13 +408,10 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
         ? (failedTransactions / transactionVolume) * 100
         : 0;
 
-    const paymentSuccessRate =
-      100 - paymentFailureRate;
+    const paymentSuccessRate = 100 - paymentFailureRate;
 
     const rtoRate =
-      transactionVolume > 0
-        ? (rtoTransactions / transactionVolume) * 100
-        : 0;
+      transactionVolume > 0 ? (rtoTransactions / transactionVolume) * 100 : 0;
 
     const chargebackRate =
       transactionVolume > 0
@@ -432,16 +424,13 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
         : 0;
 
     const codPercentage =
-      transactionVolume > 0
-        ? (codTransactions / transactionVolume) * 100
-        : 0;
+      transactionVolume > 0 ? (codTransactions / transactionVolume) * 100 : 0;
 
     const averageTransactionValue =
       transactionVolume > 0
         ? transactions.reduce(
-            (total, transaction) =>
-              total + Number(transaction.amount || 0),
-            0
+            (total, transaction) => total + Number(transaction.amount || 0),
+            0,
           ) / transactionVolume
         : 0;
 
@@ -491,17 +480,17 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
 
         features,
 
-        prediction: riskResult.level,
+        prediction: {
+          risk: riskResult.level,
+          riskProbability: riskResult.score / 100,
+        },
+
         score: riskResult.score,
         reasons: riskResult.reasons,
       },
     });
-
   } catch (error) {
-    console.error(
-      "ML risk prediction error:",
-      error
-    );
+    console.error("ML risk prediction error:", error);
 
     return res.status(500).json({
       success: false,
