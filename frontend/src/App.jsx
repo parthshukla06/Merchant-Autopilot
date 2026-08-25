@@ -101,12 +101,11 @@ function App() {
 
       console.log("WHAT-IF RESPONSE:", response.data.data);
 
+      // Only scenario result updates
       setWhatIfResult(response.data.data);
     } catch (err) {
-      console.error(
-        "WHAT-IF ERROR:",
-        err.response?.data || err.message,
-      );
+      console.error("WHAT-IF ERROR:", err.response?.data || err.message);
+
       alert(err.response?.data?.message || err.message);
     } finally {
       setWhatIfLoading(false);
