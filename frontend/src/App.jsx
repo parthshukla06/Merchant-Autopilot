@@ -99,10 +99,15 @@ function App() {
         },
       );
 
+      console.log("WHAT-IF RESPONSE:", response.data.data);
+
       setWhatIfResult(response.data.data);
     } catch (err) {
-      console.error(err);
-      alert("Unable to analyze scenario.");
+      console.error(
+        "WHAT-IF ERROR:",
+        err.response?.data || err.message,
+      );
+      alert(err.response?.data?.message || err.message);
     } finally {
       setWhatIfLoading(false);
     }
@@ -455,155 +460,164 @@ function App() {
 
           {/* ==================================================
               WHAT-IF RESULT
-          ================================================== */}
-
+================================================== */}
           {whatIfResult && (
-            <div className="what-if-results">
-              <div className="scenario-summary">
-                <strong>Scenario Result</strong>
-
-                <span>
-                  {whatIfResult.scenario.discountPercent}% discount ·{" "}
-                  {whatIfResult.scenario.salesChangePercent}% sales ·{" "}
-                  {whatIfResult.scenario.rtoChangePercent}% RTO ·{" "}
-                  {whatIfResult.scenario.refundChangePercent}% refunds
-                </span>
+            <>
+              <div className="scenario-risk">
+                <strong>Scenario Risk</strong>
+                <h3>
+                  {whatIfResult.scenarioRisk?.level?.toUpperCase() || "N/A"}
+                </h3>
+                <span>Score: {whatIfResult.scenarioRisk?.score ?? "N/A"}</span>
               </div>
 
-              {/* RESULT CARDS */}
+              <div className="what-if-results">
+                <div className="scenario-summary">
+                  <strong>Scenario Result</strong>
 
-              <div className="scenario-grid">
-                <ScenarioCard
-                  label="Revenue Change"
-                  value={whatIfResult.result.impact.revenueChange}
-                />
+                  <span>
+                    {whatIfResult.scenario.discountPercent}% discount ·{" "}
+                    {whatIfResult.scenario.salesChangePercent}% sales ·{" "}
+                    {whatIfResult.scenario.rtoChangePercent}% RTO ·{" "}
+                    {whatIfResult.scenario.refundChangePercent}% refunds
+                  </span>
+                </div>
 
-                <ScenarioCard
-                  label="Profit Change"
-                  value={whatIfResult.result.impact.profitChange}
-                />
+                {/* RESULT CARDS */}
 
-                <ScenarioCard
-                  label="Additional Orders"
-                  value={whatIfResult.result.impact.additionalOrders}
-                  plain
-                />
+                <div className="scenario-grid">
+                  <ScenarioCard
+                    label="Revenue Change"
+                    value={whatIfResult.result.impact.revenueChange}
+                  />
 
-                <ScenarioCard
-                  label="Discount Cost"
-                  value={whatIfResult.result.impact.discountCost}
-                />
+                  <ScenarioCard
+                    label="Profit Change"
+                    value={whatIfResult.result.impact.profitChange}
+                  />
 
-                <ScenarioCard
-                  label="Estimated Recovery"
-                  value={whatIfResult.result.impact.estimatedRecovery}
-                />
+                  <ScenarioCard
+                    label="Additional Orders"
+                    value={whatIfResult.result.impact.additionalOrders}
+                    plain
+                  />
 
-                <ScenarioCard
-                  label="RTO Recovery"
-                  value={whatIfResult.result.impact.rtoRecovery}
-                />
+                  <ScenarioCard
+                    label="Discount Cost"
+                    value={whatIfResult.result.impact.discountCost}
+                  />
 
-                <ScenarioCard
-                  label="Refund Recovery"
-                  value={whatIfResult.result.impact.refundRecovery}
-                />
+                  <ScenarioCard
+                    label="Estimated Recovery"
+                    value={whatIfResult.result.impact.estimatedRecovery}
+                  />
 
-                <ScenarioCard
-                  label="Payment Recovery"
-                  value={whatIfResult.result.impact.paymentRecovery}
-                />
+                  <ScenarioCard
+                    label="RTO Recovery"
+                    value={whatIfResult.result.impact.rtoRecovery}
+                  />
 
-                <ScenarioCard
-                  label="Chargeback Recovery"
-                  value={whatIfResult.result.impact.chargebackRecovery}
-                />
-              </div>
+                  <ScenarioCard
+                    label="Refund Recovery"
+                    value={whatIfResult.result.impact.refundRecovery}
+                  />
 
-              {/* RECOMMENDATION */}
+                  <ScenarioCard
+                    label="Payment Recovery"
+                    value={whatIfResult.result.impact.paymentRecovery}
+                  />
 
-              <div
-                className={`scenario-recommendation ${
-                  whatIfResult.result.impact.recommendation === "RECOMMENDED"
-                    ? "recommended"
-                    : whatIfResult.result.impact.recommendation === "NEUTRAL"
-                      ? "neutral"
-                      : "not-recommended"
-                }`}
-              >
-                <strong>{whatIfResult.result.impact.recommendation}</strong>
+                  <ScenarioCard
+                    label="Chargeback Recovery"
+                    value={whatIfResult.result.impact.chargebackRecovery}
+                  />
+                </div>
 
-                <span>Scenario analyzed using current business metrics.</span>
-              </div>
+                {/* RECOMMENDATION */}
 
-              {/* ==================================================
+                <div
+                  className={`scenario-recommendation ${
+                    whatIfResult.result.impact.recommendation === "RECOMMENDED"
+                      ? "recommended"
+                      : whatIfResult.result.impact.recommendation === "NEUTRAL"
+                        ? "neutral"
+                        : "not-recommended"
+                  }`}
+                >
+                  <strong>{whatIfResult.result.impact.recommendation}</strong>
+
+                  <span>Scenario analyzed using current business metrics.</span>
+                </div>
+
+                {/* ==================================================
                   AI BUSINESS ADVISOR
               ================================================== */}
 
-              {whatIfResult.advice?.advice && (
-                <div className="ai-advisor-card">
-                  <div className="ai-advisor-header">
-                    <div className="ai-advisor-title">
-                      <div className="ai-advisor-icon">
-                        <Sparkles size={22} />
+                {whatIfResult.advice?.advice && (
+                  <div className="ai-advisor-card">
+                    <div className="ai-advisor-header">
+                      <div className="ai-advisor-title">
+                        <div className="ai-advisor-icon">
+                          <Sparkles size={22} />
+                        </div>
+
+                        <div>
+                          <p className="eyebrow">AI BUSINESS ADVISOR</p>
+
+                          <h2>AI-Powered Decision Analysis</h2>
+                        </div>
                       </div>
 
-                      <div>
-                        <p className="eyebrow">AI BUSINESS ADVISOR</p>
-
-                        <h2>AI-Powered Decision Analysis</h2>
-                      </div>
+                      <span className="ai-badge">
+                        {whatIfResult.advice.aiGenerated
+                          ? "AI GENERATED"
+                          : "RULE BASED"}
+                      </span>
                     </div>
 
-                    <span className="ai-badge">
-                      {whatIfResult.advice.aiGenerated
-                        ? "AI GENERATED"
-                        : "RULE BASED"}
-                    </span>
+                    <div className="ai-advisor-content">
+                      {whatIfResult.advice.advice
+                        .split("\n")
+                        .map((line, index) => {
+                          const trimmedLine = line.trim();
+
+                          if (!trimmedLine) {
+                            return <div key={index} className="ai-space" />;
+                          }
+
+                          if (trimmedLine.startsWith("**SUMMARY:**")) {
+                            return <h3 key={index}>Summary</h3>;
+                          }
+
+                          if (trimmedLine.startsWith("**FINANCIAL IMPACT:**")) {
+                            return <h3 key={index}>Financial Impact</h3>;
+                          }
+
+                          if (trimmedLine.startsWith("**RECOMMENDATION:**")) {
+                            return <h3 key={index}>Recommendation</h3>;
+                          }
+
+                          if (trimmedLine.startsWith("**EXPLANATION:**")) {
+                            return <h3 key={index}>Explanation</h3>;
+                          }
+
+                          if (trimmedLine.startsWith("**NEXT STEP:**")) {
+                            return <h3 key={index}>Next Step</h3>;
+                          }
+
+                          return (
+                            <p key={index}>
+                              {trimmedLine
+                                .replace(/^\*\s*/, "• ")
+                                .replace(/^\d+\.\s*/, (match) => match)}
+                            </p>
+                          );
+                        })}
+                    </div>
                   </div>
-
-                  <div className="ai-advisor-content">
-                    {whatIfResult.advice.advice
-                      .split("\n")
-                      .map((line, index) => {
-                        const trimmedLine = line.trim();
-
-                        if (!trimmedLine) {
-                          return <div key={index} className="ai-space" />;
-                        }
-
-                        if (trimmedLine.startsWith("**SUMMARY:**")) {
-                          return <h3 key={index}>Summary</h3>;
-                        }
-
-                        if (trimmedLine.startsWith("**FINANCIAL IMPACT:**")) {
-                          return <h3 key={index}>Financial Impact</h3>;
-                        }
-
-                        if (trimmedLine.startsWith("**RECOMMENDATION:**")) {
-                          return <h3 key={index}>Recommendation</h3>;
-                        }
-
-                        if (trimmedLine.startsWith("**EXPLANATION:**")) {
-                          return <h3 key={index}>Explanation</h3>;
-                        }
-
-                        if (trimmedLine.startsWith("**NEXT STEP:**")) {
-                          return <h3 key={index}>Next Step</h3>;
-                        }
-
-                        return (
-                          <p key={index}>
-                            {trimmedLine
-                              .replace(/^\*\s*/, "• ")
-                              .replace(/^\d+\.\s*/, (match) => match)}
-                          </p>
-                        );
-                      })}
-                  </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            </>
           )}
         </section>
 
