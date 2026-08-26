@@ -1,559 +1,433 @@
-# Merchant Autopilot
+# 🚀 Merchant Autopilot
 
-> AI-powered merchant intelligence and risk monitoring platform for detecting business risks, analyzing transaction behaviour, and helping merchants make better decisions.
+### AI-Powered Merchant Risk & Decision Intelligence Platform
 
-## 🚀 Live Demo
+Merchant Autopilot is a full-stack business intelligence platform designed to help merchants understand operational risks, simulate business decisions, and receive actionable recommendations.
 
-https://merchant-autopilot-6.onrender.com
-
-## 📂 GitHub Repository
-
-https://github.com/parthshukla06/Merchant-Autopilot
-
----
-
-## 📌 Overview
-
-Merchant Autopilot is a full-stack merchant intelligence platform designed to help businesses monitor their financial and transaction health.
-
-The system analyzes merchant transactions and generates:
-
-- Merchant risk scores
-- Risk levels
-- Risk reasons
-- Transaction behaviour insights
-- ML-style risk predictions
-- What-if scenario analysis
-- Business recommendations
-- Financial impact insights
-
-The goal is to convert raw merchant transaction data into actionable business intelligence.
+The system combines **real-time merchant analytics, ML-based risk prediction, What-If scenario simulation, and AI-powered business advice** in a single dashboard.
 
 ---
 
 ## 🎯 Problem Statement
 
-Merchants generate large amounts of transaction data, but identifying business risks manually can be difficult.
+Online merchants deal with multiple operational risks such as:
 
-Problems such as:
-
-- High chargebacks
-- Increasing refunds
-- High Return-to-Origin (RTO)
+- Return-to-Origin (RTO)
+- Refunds
 - Payment failures
-- Poor cash flow
-- Unusual transaction behaviour
+- Chargebacks
+- Revenue fluctuations
+- Discount costs
+- Profit uncertainty
 
-can negatively affect business performance.
+Traditional dashboards mainly show historical data.
 
-Merchant Autopilot analyzes these signals and provides a centralized dashboard for monitoring merchant health and risk.
+**Merchant Autopilot goes one step further by answering:**
 
----
+> "What will happen to my business if I change this?"
 
-## ✨ Key Features
+For example:
 
-### 📊 Merchant Intelligence Dashboard
-
-Provides a centralized view of merchant performance and business health.
-
-### ⚠️ Risk Analysis
-
-Calculates merchant risk based on important business indicators including:
-
-- Chargeback rate
-- Refund rate
-- RTO rate
-- Payment success rate
-- Cash-flow conditions
-
-Risk levels are classified as:
-
-- Healthy
-- Warning
-- Critical
-
-### 🤖 ML Risk Prediction
-
-The system analyzes transaction-level features such as:
-
-- Transaction volume
-- Payment failure rate
-- RTO rate
-- Chargeback rate
-- Refund rate
-- COD percentage
-- Average transaction value
-
-and generates a predicted risk level, score, and reasons.
-
-### 🔍 Transaction Analysis
-
-Transaction data is analyzed to identify patterns and calculate merchant-level performance metrics.
-
-### 🧪 What-If Analysis
-
-Allows merchants to evaluate potential scenarios and understand how changes in business conditions can affect risk and financial outcomes.
-
-### 💡 Recommendations
-
-The system generates actionable recommendations based on detected merchant risks.
-
-### 📈 Financial Impact Analysis
-
-Identifies potential financial impact associated with merchant risk factors.
-
-### 🚨 Anomaly Detection
-
-Transaction behaviour can be analyzed for unusual patterns and potential anomalies.
+- What if sales increase by 15%?
+- What if RTO decreases by 20%?
+- What if refunds decrease by 30%?
+- What if payment failures decrease by 40%?
+- What if chargebacks decrease by 25%?
+- Will the scenario improve profitability?
 
 ---
 
-## 🏗️ System Architecture
+# ✨ Key Features
+
+## 📊 Business Intelligence Dashboard
+
+Provides a centralized view of merchant performance including:
+
+- Total revenue
+- Profit
+- Orders
+- Operational risk
+- RTO
+- Refunds
+- Payment failures
+- Chargebacks
+- Critical business issues
+- Key business insights
+
+---
+
+## 🔮 What-If Simulator
+
+The What-If Simulator allows merchants to modify business parameters and instantly evaluate the potential impact.
+
+### Supported Scenario Inputs
+
+| Parameter | Description |
+|---|---|
+| Discount % | Simulates the effect of discounts |
+| Sales Change % | Simulates sales growth or decline |
+| RTO Change % | Simulates RTO improvement/deterioration |
+| Refund Change % | Simulates refund rate changes |
+| Payment Failure % | Simulates payment failure changes |
+| Chargeback % | Simulates chargeback changes |
+
+The engine calculates:
+
+- Scenario revenue
+- Scenario profit
+- Scenario orders
+- Scenario risk rates
+- Revenue change
+- Profit change
+- Additional orders
+- Discount cost
+- Estimated recovery
+- RTO recovery
+- Refund recovery
+- Payment recovery
+- Chargeback recovery
+- Final recommendation
+
+### Example
 
 ```text
-                    ┌─────────────────────┐
-                    │    React Frontend   │
-                    │      Dashboard      │
-                    └──────────┬──────────┘
-                               │
-                               │ HTTP / Axios
-                               ▼
-                    ┌─────────────────────┐
-                    │   Node.js + Express │
-                    │       Backend       │
-                    └──────────┬──────────┘
-                               │
-             ┌─────────────────┼─────────────────┐
-             │                 │                 │
-             ▼                 ▼                 ▼
-      ┌────────────┐    ┌──────────────┐   ┌──────────────┐
-      │  MongoDB   │    │ Risk Engine  │   │ Intelligence │
-      │    Atlas   │    │              │   │   Services   │
-      └────────────┘    └──────────────┘   └──────────────┘
-```
----
+Current RTO       → 10.48%
+Scenario RTO      → 8.38%
 
-## 🛠️ Tech Stack
+Current Refund    → 8.00%
+Scenario Refund   → 6.00%
 
-### Frontend
+Current Profit    → ₹X
+Scenario Profit   → ₹Y
 
-- React.js
-- Vite
-- Axios
-- CSS
+The system then determines whether the scenario is:
 
-### Backend
+RECOMMENDED
+NEUTRAL
+NOT RECOMMENDED
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
+🤖 ML-Based Risk Prediction
 
-### Security & Middleware
+Merchant Autopilot includes an ML pipeline for merchant risk analysis.
 
-- Helmet
-- CORS
-- Morgan
-- dotenv
+The ML workflow includes:
 
-### Deployment
+Transaction Data
+       ↓
+Dataset Generation
+       ↓
+Feature Preparation
+       ↓
+Model Training
+       ↓
+Risk Prediction
+       ↓
+Merchant Risk Score
+ML Components
+backend/ml/
+├── generateDataset.js
+├── merchant-risk-dataset.csv
+├── merchant-risk-dataset.json
+├── predict.py
+├── train_model.py
+└── risk_model.pkl
 
-- Render
-- MongoDB Atlas
+The trained model is used to support merchant risk intelligence.
 
----
+🧠 AI Business Advisor
 
-## 📁 Project Structure
+After running a What-If scenario, Merchant Autopilot generates business advice based on the calculated scenario.
 
-```text
+The advisor provides sections such as:
+
+Summary
+Financial Impact
+Recommendation
+Explanation
+Next Step
+
+The system can identify whether the scenario is beneficial and provide decision-oriented guidance.
+
+The dashboard also indicates whether the advice was:
+
+AI GENERATED
+
+or
+
+RULE BASED
+📈 Scenario Analytics
+
+The analytics section compares current business performance with the simulated scenario.
+
+Financial Comparison
+
+Compares:
+
+Revenue
+Profit
+Orders
+Operational Risk Comparison
+
+Compares:
+
+RTO
+Refund
+Payment Failure
+Chargeback
+Risk Distribution
+
+Displays:
+
+Current operational risk
+Scenario operational risk
+
+This allows merchants to visually understand how a decision affects their business.
+
+🏗️ System Architecture
+
+                         ┌──────────────────────┐
+                         │      Frontend        │
+                         │      React + Vite    │
+                         └──────────┬───────────┘
+                                    │
+                                    │ REST API
+                                    ▼
+                         ┌──────────────────────┐
+                         │       Backend        │
+                         │   Node.js + Express  │
+                         └──────────┬───────────┘
+                                    │
+              ┌─────────────────────┼─────────────────────┐
+              │                     │                     │
+              ▼                     ▼                     ▼
+       ┌─────────────┐      ┌──────────────┐      ┌──────────────┐
+       │  MongoDB    │      │ What-If      │      │ Risk Engine  │
+       │ Transactions│      │ Engine       │      │              │
+       └─────────────┘      └──────────────┘      └──────┬───────┘
+                                                         │
+                                                         ▼
+                                                  ┌──────────────┐
+                                                  │ ML Pipeline  │
+                                                  └──────┬───────┘
+                                                         │
+                                                         ▼
+                                                  ┌──────────────┐
+                                                  │ AI Advisor   │
+                                                  └──────────────┘
+
+🛠️ Tech Stack
+Frontend
+React
+Vite
+Axios
+CSS
+JavaScript
+Backend
+Node.js
+Express.js
+MongoDB
+Mongoose
+REST APIs
+Machine Learning
+Python
+Scikit-learn
+Dataset generation
+Model training
+Risk prediction
+AI
+AI-powered business advice
+Rule-based fallback
+Scenario-based decision analysis
+📁 Project Structure
 Merchant-Autopilot/
 │
 ├── backend/
-│   ├── config/
-│   │   └── db.js
 │   │
+│   ├── controllers/
 │   ├── models/
-│   │   ├── Merchant.js
-│   │   └── Transaction.js
-│   │
 │   ├── routes/
-│   │   ├── merchant.routes.js
-│   │   ├── transaction.routes.js
-│   │   └── whatIf.routes.js
-│   │
 │   ├── services/
-│   │   ├── riskEngine.js
-│   │   ├── anomalyEngine.js
-│   │   ├── recommendationEngine.js
-│   │   ├── merchantIntelligenceEngine.js
-│   │   ├── financialImpactEngine.js
-│   │   ├── aiExplanationEngine.js
-│   │   └── mlService.js
+│   ├── ml/
+│   │   ├── generateDataset.js
+│   │   ├── merchant-risk-dataset.csv
+│   │   ├── merchant-risk-dataset.json
+│   │   ├── predict.py
+│   │   ├── train_model.py
+│   │   └── risk_model.pkl
 │   │
-│   ├── scripts/
-│   │   └── generateDemoData.js
-│   │
-│   ├── server.js
-│   └── package.json
+│   └── server.js
 │
 ├── frontend/
 │   ├── src/
+│   │   ├── components/
+│   │   │   └── AnalyticsCharts.jsx
 │   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   │
-│   ├── public/
-│   ├── index.html
-│   └── package.json
+│   │   └── App.css
+│   └── ...
 │
+├── .gitignore
 └── README.md
 
----
 
-## ⚙️ Installation & Setup
+⚙️ Installation
+1. Clone Repository
+git clone parthshukla06/Merchant-Autopilot
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/parthshukla06/Merchant-Autopilot.git
 cd Merchant-Autopilot
-```
 
-### 2. Backend Setup
-
-```bash
+2. Backend Setup
 cd backend
 npm install
-```
 
-Create a `.env` file inside the `backend` folder:
+Create a .env file:
 
-```env
 PORT=5000
-MONGO_URI=your_mongodb_atlas_connection_string
-NODE_ENV=production
-```
+MONGO_URI=your_mongodb_connection_string
 
 Start the backend:
 
-```bash
-npm start
-```
+npm run dev
+3. Frontend Setup
 
-The backend will run on:
+Open another terminal:
 
-```text
-http://localhost:5000
-```
-
-### 3. Frontend Setup
-
-Open a new terminal:
-
-```bash
 cd frontend
 npm install
 npm run dev
-```
 
 The frontend will run on the Vite development server.
 
-### 4. Production Build
-
-To create the production frontend build:
-
-```bash
-npm run build
-```
-
-The generated production files will be available inside:
-
-```text
-frontend/dist/
-```
-
----
-
-## 🔐 Environment Variables
-
-Do not commit sensitive credentials such as database connection strings or API keys to GitHub.
-
-Example:
-
-```env
-MONGO_URI=your_mongodb_atlas_connection_string
-PORT=5000
-NODE_ENV=production
-```
-
-Make sure `.env` is included in `.gitignore`.
-
----
-
----
-
-## 🔌 API Endpoints
-
-### Health Check
-
-```http
-GET /api/health
-```
-
-Checks whether the backend API is running.
-
-### Merchant Intelligence
-
-```http
+🔌 API
+Merchant Intelligence
 GET /api/merchants/:merchantId/intelligence
-```
 
-Returns merchant intelligence, risk information, recommendations, anomalies, and financial insights.
+Returns merchant analytics and intelligence data.
 
-### Merchant Risk
-
-```http
-GET /api/merchants/:merchantId/risk
-```
-
-Calculates the merchant's overall business risk.
-
-### ML Risk Prediction
-
-```http
-GET /api/merchants/:merchantId/ml-risk
-```
-
-Analyzes transaction-level features and returns:
-
-- Risk prediction
-- Risk score
-- Risk reasons
-- Calculated transaction features
-
-### What-If Analysis
-
-```http
+What-If Analysis
 POST /api/merchants/:merchantId/what-if
-```
+Request
+{
+  "discountPercent": 10,
+  "salesChangePercent": 15,
+  "rtoChangePercent": -20,
+  "refundChangePercent": -15,
+  "paymentFailureChangePercent": -20,
+  "chargebackChangePercent": -10
+}
+Response
+
+The API returns:
 
-Evaluates hypothetical business scenarios and their potential impact.
+Current metrics
+Scenario metrics
+Scenario risk
+Financial impact
+Recovery estimates
+Recommendation
+AI business advice
+🔐 Input Validation
+
+The What-If API validates scenario inputs before processing.
+
+Examples:
+
+Discount: 0% – 100%
+Sales change: minimum -100%
+Operational changes: minimum -100%
+
+Invalid values are rejected by the backend.
+
+📊 Business Logic
+
+The What-If engine calculates scenario values using the merchant's current metrics.
+
+Orders
+New Orders =
+Current Orders × (1 + Sales Change / 100)
+Revenue
+New Revenue =
+Current Revenue × (1 + Sales Change / 100)
+Discount Cost
+Discount Cost =
+New Revenue × Discount / 100
+Revenue After Discount
+Revenue After Discount =
+New Revenue - Discount Cost
+
+Operational rates are then adjusted according to the scenario changes.
+
+Recovery estimates are calculated from improvements in:
+
+RTO
+Refunds
+Payment failures
+Chargebacks
+
+Finally, the system calculates:
+
+Scenario Profit
+Profit Change
+Recommendation
+🧪 Scenario Testing
+
+The application has been tested with:
+
+Positive sales growth
+Negative sales growth
+Discount changes
+RTO improvements
+Refund improvements
+Payment failure improvements
+Chargeback improvements
+Invalid input values
+Multiple scenario runs
+Dynamic analytics updates
+🎯 Project Goals
+
+Merchant Autopilot aims to transform merchant analytics from:
+
+"What happened?"
+
+into:
+
+"What could happen?"
+
+and ultimately:
+
+"What should I do?"
+🚀 Future Improvements
+
+Potential future enhancements include:
+
+Automated merchant alerts
+Historical scenario tracking
+Advanced ML risk models
+Merchant-level personalization
+Time-series forecasting
+Automated recommendations
+Multi-merchant management
+Cloud deployment
+Role-based authentication
+Advanced financial forecasting
+👨‍💻 Author
 
-### Transactions
+Parth Shukla
 
-```http
-GET /api/transactions
-```
+Full Stack Developer | MERN Stack | AI & ML
 
-Retrieves transaction data used for merchant analysis.
+⭐ Why Merchant Autopilot?
 
----
+Merchant Autopilot combines:
 
-## 🧠 Risk Calculation
+Full-Stack Development
+        +
+Data Analytics
+        +
+Machine Learning
+        +
+AI
+        +
+Business Decision Intelligence
 
-Merchant Autopilot calculates a risk score using multiple business indicators.
+into a single practical application designed around real-world merchant problems.
 
-### Risk Factors
-
-| Factor | Impact |
-|---|---|
-| Chargeback Rate | High chargebacks increase risk |
-| Refund Rate | Frequent refunds increase risk |
-| RTO Rate | High RTO indicates delivery/order issues |
-| Payment Success Rate | Low success rate increases risk |
-| Cash Flow | Low or negative profit increases risk |
-
-### Risk Levels
-
-- 🟢 **Healthy** — Low business risk
-- 🟡 **Warning** — Moderate business risk
-- 🔴 **Critical** — High business risk
-
-The risk engine combines these factors into a score between `0` and `100`.
-
-Higher scores indicate higher merchant risk.
-
----
-
----
-
-## 🧪 Demo Data
-
-Merchant Autopilot includes a demo data generation script for testing and demonstrating the platform.
-
-The script generates transaction data for a merchant across multiple days with both healthy and deteriorating business periods.
-
-Demo transactions include conditions such as:
-
-- Successful transactions
-- Failed payments
-- Refunds
-- Chargebacks
-- RTO transactions
-- COD transactions
-
-To generate demo transactions:
-
-```bash
-cd backend
-node scripts/generateDemoData.js
-```
-
-This allows the dashboard and risk analysis features to be tested with realistic transaction scenarios.
-
----
-
----
-
-## 🚀 Deployment
-
-The application is deployed using Render.
-
-### Frontend
-
-The React frontend is deployed as a production build.
-
-### Backend
-
-The Node.js and Express backend is deployed as a web service.
-
-### Database
-
-MongoDB Atlas is used as the cloud database.
-
-### Live Application
-
-https://merchant-autopilot-6.onrender.com
-
-> Make sure all required environment variables are configured in the deployment platform before starting the application.
-
----
-
----
-
-## 📊 Example Risk Analysis
-
-The platform can identify multiple risk signals from merchant transaction data.
-
-Example:
-
-```text
-Transaction Volume      : 210
-Payment Failure Rate    : 8.57%
-RTO Rate                : 10.48%
-Chargeback Rate         : 3.33%
-Refund Rate             : 7.62%
-COD Percentage          : 41.43%
-Average Transaction     : ₹5,663.83
-
-Risk Prediction         : WARNING
-Risk Score              : 58
-```
-
-Identified risk factors may include:
-
-- High chargeback rate
-- Elevated refund rate
-- Elevated RTO rate
-- Low payment success rate
-
----
-
-## 🔄 Application Flow
-
-```text
-User opens dashboard
-        │
-        ▼
-Frontend requests merchant data
-        │
-        ▼
-Express API receives request
-        │
-        ▼
-MongoDB provides merchant & transaction data
-        │
-        ▼
-Risk & intelligence engines analyze data
-        │
-        ├───────────────┐
-        ▼               ▼
-Risk Analysis      Recommendations
-        │               │
-        └───────┬───────┘
-                ▼
-        Frontend Dashboard
-                │
-                ▼
-       Actionable Business Insights
-```
-
----
-
-## 📌 Project Highlights
-
-- Full-stack MERN-based application
-- Merchant-focused risk monitoring
-- Transaction-level business analysis
-- Automated risk scoring
-- ML-style merchant risk prediction
-- What-if business scenario analysis
-- Financial impact analysis
-- Anomaly detection
-- Actionable recommendations
-- Cloud deployment with Render
-- MongoDB Atlas integration
-- Responsive dashboard interface
-
----
-
-## 🔮 Future Improvements
-
-The platform can be extended with:
-
-- Real machine-learning model deployment
-- Real-time transaction monitoring
-- Advanced fraud detection
-- Automated merchant alerts
-- Email and notification integration
-- Historical risk trend visualization
-- More advanced financial forecasting
-- Role-based authentication
-- Merchant onboarding
-- Automated report generation
-- Payment gateway integrations
-
----
-
-## 👨‍💻 Developer
-
-**Parth Shukla**
-
-B.Tech Computer Science Student
-
-### Connect
-
-- GitHub: https://github.com/parthshukla06
-
----
-
-## 📄 License
-
-This project is developed for educational, demonstration, and portfolio purposes.
-
----
-
-## ⭐ Acknowledgement
-
-Merchant Autopilot was developed as a full-stack project to demonstrate practical implementation of:
-
-- React.js
-- Node.js
-- Express.js
-- MongoDB
-- REST APIs
-- Risk analysis
-- Business intelligence
-- Data-driven decision making
-
-If you find this project useful, consider giving the repository a ⭐ on GitHub.
