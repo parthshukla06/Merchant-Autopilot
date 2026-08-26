@@ -393,14 +393,23 @@ Finally, the system calculates:
 Scenario Profit
 Profit Change
 Recommendation
-📸 Screenshots
-Dashboard
+## 📸 Screenshots
 
-What-If Simulator
+### Dashboard
 
-AI Advisor
+![Merchant Autopilot Dashboard](docs/screenshots/dashboard.png)
 
-Anomaly Detection
+### What-If Simulator
+
+![What-If Simulator](docs/screenshots/what-if.png)
+
+### AI Advisor
+
+![AI Advisor](docs/screenshots/ai-advisor.png)
+
+### Anomaly Detection
+
+![Anomaly Detection](docs/screenshots/anomalies.png)
 
 🧪 Testing
 
@@ -435,6 +444,8 @@ Automated recommendations
 Multi-merchant management
 Role-based authentication
 Advanced financial forecasting
+
+
 👨‍💻 Author
 
 Parth Shukla
