@@ -31,7 +31,6 @@ button {
   cursor: pointer;
 }
 
-
 /* =========================================
    APP
 ========================================= */
@@ -49,7 +48,6 @@ button {
   background: #0b1020;
   color: #f3f6ff;
 }
-
 
 /* =========================================
    TOPBAR
@@ -108,7 +106,6 @@ button {
   gap: 10px;
 }
 
-
 /* =========================================
    BUTTONS
 ========================================= */
@@ -146,7 +143,6 @@ button {
   border-color: #303b55;
 }
 
-
 /* =========================================
    DASHBOARD
 ========================================= */
@@ -156,7 +152,6 @@ button {
   margin: 0 auto;
   padding: 42px 0 80px;
 }
-
 
 /* =========================================
    WELCOME
@@ -245,7 +240,6 @@ button {
   background: #123024;
 }
 
-
 /* =========================================
    METRICS
 ========================================= */
@@ -315,19 +309,136 @@ button {
   font-size: 11px;
 }
 
-.ml-risk-card.high {
+.ml-risk-card.critical {
   border-color: #f2b8b5;
 }
 
-.ml-risk-card.medium {
+.ml-risk-card {
+  padding-bottom: 22px;
+}
+
+.ml-risk-card.warning {
   border-color: #f2d38b;
 }
 
-.ml-risk-card.low {
+.ml-risk-card.healthy {
   border-color: #a7dfc3;
 }
 
+.ml-probabilities {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
 
+.ml-probabilities div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.ml-probabilities span {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.ml-probabilities strong {
+  color: #394258;
+  font-weight: 700;
+}
+
+/* =========================================
+   ML RISK CARD
+========================================= */
+
+.ml-risk-card {
+  overflow: hidden;
+}
+
+.ml-probabilities {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.ml-probabilities div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.ml-probabilities span {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.ml-probabilities strong {
+  color: #394258;
+  font-weight: 700;
+}
+
+/* =========================================
+   ML RISK FACTORS
+========================================= */
+
+.ml-reasons {
+  margin-top: 22px;
+  width: 100%;
+}
+
+.ml-reasons > strong {
+  display: block;
+  margin-bottom: 12px;
+
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.ml-reason-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.ml-reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  width: 100%;
+}
+
+.ml-reason-dot {
+  flex-shrink: 0;
+
+  font-size: 11px;
+  line-height: 18px;
+
+  color: #6b7280;
+}
+
+.ml-reason-item p {
+  margin: 0;
+
+  flex: 1;
+  min-width: 0;
+
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+
+  color: #53627a;
+
+  overflow-wrap: anywhere;
+}
 /* =========================================
    CONTENT GRID
 ========================================= */
@@ -382,18 +493,25 @@ button {
   font-size: 13px;
 }
 
-
 /* =========================================
    ISSUES
 ========================================= */
 
+/* =========================================
+   BUSINESS ANOMALIES
+========================================= */
+
 .issue-section {
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .issue-section h3 {
-  margin: 0 0 10px;
-  font-size: 12px;
+  margin: 0 0 9px !important;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left !important;
 }
 
 .critical-title {
@@ -407,34 +525,48 @@ button {
 .issue {
   display: flex;
   align-items: center;
+  gap: 11px;
 
-  gap: 12px;
-
-  padding: 13px;
-
-  border-radius: 10px;
+  padding: 11px 12px;
   margin-bottom: 8px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.issue:hover {
+  transform: translateY(-1px);
 }
 
 .issue.critical {
   background: #fff5f4;
+  border-color: #f6d3d0;
 }
 
 .issue.high {
   background: #fff9ed;
+  border-color: #f3dfb5;
 }
 
 .dark .issue.critical {
   background: #35191a;
+  border-color: #5a292a;
 }
 
 .dark .issue.high {
   background: #342a16;
+  border-color: #5a471f;
 }
 
 .issue-icon {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
 
   display: grid;
   place-items: center;
@@ -452,36 +584,61 @@ button {
   background: #ffedbd;
 }
 
+.dark .issue.critical .issue-icon {
+  background: #542526;
+}
+
+.dark .issue.high .issue-icon {
+  background: #4d3b1a;
+}
+
 .issue-content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+
+  min-width: 0;
 }
 
 .issue-content strong {
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .issue-content span {
   color: #7a8499;
   font-size: 11px;
+  line-height: 1.3;
 }
 
+.dark .issue-content span {
+  color: #9aa8bd;
+}
 
 /* =========================================
    INSIGHT
 ========================================= */
 
+/* =========================================
+   KEY INSIGHT
+========================================= */
+
 .insight-panel {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 }
 
 .insight-panel h2 {
   margin: 0 0 18px;
   font-size: 21px;
+  font-weight: 750;
+  line-height: 1.3;
+  color: #f8fafc;
 }
 
+/* Main insight message */
 .insight-box {
   display: flex;
   align-items: flex-start;
@@ -492,7 +649,6 @@ button {
 
   background: #f3f4ff;
   border-radius: 12px;
-
   color: #4143b8;
 }
 
@@ -500,12 +656,15 @@ button {
   background: #20254b;
   color: #c7c9ff;
 }
-
 .insight-box p {
   margin: 0;
-
   font-size: 13px;
   line-height: 1.65;
+}
+
+.insight-box svg {
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .exposure {
@@ -523,6 +682,68 @@ button {
   border-color: #29344b;
 }
 
+.insight-box p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 500;
+
+  color: #d8dcff;
+}
+
+/* Light theme */
+.app:not(.dark) .insight-panel h2 {
+  color: #0f172a;
+}
+
+.app:not(.dark) .insight-box {
+  background: #f3f4ff;
+  border-color: #dfe2ff;
+  color: #4143b8;
+}
+
+.app:not(.dark) .insight-box p {
+  color: #475569 !important;
+}
+
+/* Total exposure */
+.exposure {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: auto;
+  padding-top: 22px;
+
+  border-top: 1px solid #29344b;
+}
+
+.exposure span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9aa8bd;
+}
+
+.exposure strong {
+  font-size: 21px;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+/* Light theme exposure */
+.app:not(.dark) .exposure {
+  border-color: #e8ebf2;
+}
+
+.app:not(.dark) .exposure span {
+  color: #64748b;
+}
+
+.app:not(.dark) .exposure strong {
+  color: #0f172a;
+}
+
 .exposure span {
   color: #7a8499;
   font-size: 12px;
@@ -531,7 +752,6 @@ button {
 .exposure strong {
   font-size: 20px;
 }
-
 
 /* =========================================
    RECOMMENDATIONS
@@ -599,11 +819,10 @@ button {
 
 .recommendation-content p {
   margin: 7px 0 0;
-
   color: #707b90;
-
   font-size: 12px;
   line-height: 1.55;
+  text-align: left;
 }
 
 .priority-tag {
@@ -630,6 +849,20 @@ button {
   color: #4d50ca;
 }
 
+.dark .priority-tag.critical {
+  background: #542526;
+  color: #ff8a80;
+}
+
+.dark .priority-tag.high {
+  background: #4d3b1a;
+  color: #f5c76a;
+}
+
+.dark .priority-tag.medium {
+  background: #292d5c;
+  color: #aeb2ff;
+}
 
 /* =========================================
    WHAT IF
@@ -718,7 +951,6 @@ button {
   cursor: not-allowed;
 }
 
-
 /* =========================================
    WHAT IF RESULTS
 ========================================= */
@@ -792,7 +1024,6 @@ button {
   letter-spacing: -0.3px;
 }
 
-
 /* =========================================
    SCENARIO RECOMMENDATION
 ========================================= */
@@ -852,6 +1083,201 @@ button {
   border-color: #653032;
 }
 
+/* =========================================
+   AI BUSINESS ADVISOR
+========================================= */
+
+.ai-advisor-card {
+  margin-top: 18px;
+  padding: 22px;
+
+  border: 1px solid #e4e7ef;
+  border-radius: 14px;
+
+  background: #fafbff;
+}
+
+.ai-advisor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ai-advisor-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ai-advisor-icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: #eef0ff;
+  color: #5758d8;
+
+  flex-shrink: 0;
+}
+
+.ai-advisor-title .eyebrow {
+  margin-bottom: 4px;
+}
+
+.ai-advisor-title h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  color: #0f172a;
+}
+
+.ai-badge {
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  background: #eef0ff;
+  color: #4d50ca;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.ai-advisor-content {
+  padding-top: 18px;
+  border-top: 1px solid #e4e7ef;
+  text-align: left;
+}
+
+.ai-advisor-content h3 {
+  margin: 18px 0 7px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #394258;
+  text-align: left;
+}
+
+.ai-advisor-content h3:first-child {
+  margin-top: 0;
+}
+
+.ai-advisor-content p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #64748b;
+  text-align: left;
+}
+
+.ai-financial-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #e4e7ef;
+
+  font-size: 12px;
+}
+
+.ai-financial-row:last-child {
+  border-bottom: none;
+}
+
+.ai-financial-row span {
+  color: #64748b;
+}
+
+.ai-financial-row strong {
+  color: #0f172a;
+  font-weight: 800;
+  text-align: right;
+}
+
+.dark .ai-financial-row {
+  border-color: #29344b;
+}
+
+.dark .ai-financial-row span {
+  color: #9aa8bd;
+}
+
+.dark .ai-financial-row strong {
+  color: #f8fafc;
+}
+
+.ai-space {
+  height: 6px;
+}
+
+/* DARK MODE */
+
+.dark .ai-advisor-card {
+  background: #111a2b;
+  border-color: #29344b;
+}
+
+.dark .ai-advisor-icon {
+  background: #292d5c;
+  color: #aeb2ff;
+}
+
+.dark .ai-advisor-title h2 {
+  color: #f8fafc;
+}
+
+.dark .ai-badge {
+  background: #292d5c;
+  color: #aeb2ff;
+}
+
+.dark .ai-advisor-content {
+  border-color: #29344b;
+}
+
+.dark .ai-advisor-content h3 {
+  color: #e7ebf5;
+}
+
+.dark .ai-advisor-content p {
+  color: #aeb9cb;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .ai-advisor-card {
+    padding: 18px;
+  }
+
+  .ai-advisor-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ai-advisor-title h2 {
+    font-size: 16px;
+  }
+
+  .ai-badge {
+    align-self: flex-start;
+  }
+}
 
 /* =========================================
    AI NEXT STEP
@@ -862,22 +1288,14 @@ button {
 
   padding: 18px;
 
-  background: linear-gradient(
-    135deg,
-    #f3f4ff,
-    #fafaff
-  );
+  background: linear-gradient(135deg, #f3f4ff, #fafaff);
 
   border: 1px solid #dfe1ff;
   border-radius: 12px;
 }
 
 .dark .ai-next-step {
-  background: linear-gradient(
-    135deg,
-    #1b2042,
-    #171d31
-  );
+  background: linear-gradient(135deg, #1b2042, #171d31);
 
   border-color: #343c6d;
 }
@@ -908,7 +1326,6 @@ button {
 .dark .ai-next-step p {
   color: #aeb6c8;
 }
-
 
 /* =========================================
    LOADING
@@ -943,7 +1360,6 @@ button {
     transform: rotate(360deg);
   }
 }
-
 
 /* =========================================
    RESPONSIVE
@@ -1364,12 +1780,7 @@ button {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6,
-    #06b6d4
-  );
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
 }
 
 /* Section heading */
@@ -1429,11 +1840,7 @@ button {
   padding: 14px 22px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(
-    135deg,
-    #6366f1,
-    #4f46e5
-  );
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
   font-weight: 700;
   font-size: 15px;
@@ -1628,25 +2035,19 @@ button {
   overflow: visible;
 }
 
-.analytics-section
-  .chart-container
-  .recharts-responsive-container {
+.analytics-section .chart-container .recharts-responsive-container {
   width: 100% !important;
   height: 100% !important;
   min-width: 300px !important;
   min-height: 280px !important;
 }
 
-.analytics-section
-  .chart-container
-  .recharts-wrapper {
+.analytics-section .chart-container .recharts-wrapper {
   width: 100% !important;
   height: 100% !important;
 }
 
-.analytics-section
-  .chart-container
-  .recharts-surface {
+.analytics-section .chart-container .recharts-surface {
   overflow: visible !important;
 }
 
@@ -1678,7 +2079,9 @@ button {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .metric-card:hover {
@@ -1751,8 +2154,7 @@ button {
   color: #818cf8;
 }
 
-
- /* ==================================================
+/* ==================================================
     LIGHT MODE - SCENARIO RESULT CARDS
  ================================================== */
 
@@ -1788,7 +2190,7 @@ button {
   color: #64748b !important;
 }
 
- /* Hover */
+/* Hover */
 
 .app:not(.dark) .scenario-card:hover {
   background: #ffffff !important;
@@ -1796,7 +2198,6 @@ button {
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1) !important;
 }
 
- 
 /* ==================================================
    FINAL LIGHT MODE TEXT VISIBILITY
 ================================================== */
@@ -1901,7 +2302,6 @@ button {
   color: #818cf8 !important;
 }
 
- 
 /* ==================================================
    FINAL LIGHT MODE WELCOME / BUSINESS NAME
 ================================================== */
@@ -1935,13 +2335,6 @@ button {
 .dark .welcome .eyebrow {
   color: #818cf8 !important;
 }
-
-
-
-
-
-
-
 
 /* =========================================
    FINAL LIGHT MODE TEXT FIX
@@ -2059,18 +2452,15 @@ button {
   color: #64748b !important;
 }
 
-
 /* Inputs */
 .app:not(.dark) input {
   color: #f8fafc !important;
   background: #0f172a !important;
 }
 
-
 /* =========================================
    END LIGHT MODE FIX
    ========================================= */
-
 
 /* =========================================
    FINAL RISK DISTRIBUTION VISIBILITY FIX
@@ -2109,3 +2499,174 @@ button {
   opacity: 1 !important;
 }
 
+.light .ml-reasons > strong {
+  color: #394258;
+}
+
+.light .ml-reason-item p {
+  color: #6b7280;
+}
+
+/* =========================================
+   ML RISK CARD
+========================================= */
+
+.ml-risk-card {
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.ml-risk-card .ml-probabilities {
+  margin-top: 14px;
+}
+
+.ml-risk-card .ml-reasons {
+  margin-top: 18px;
+}
+
+.ml-risk-card .ml-reason-list {
+  gap: 8px;
+}
+
+.ml-risk-card .ml-reason-item {
+  gap: 7px;
+}
+
+.ml-risk-card .ml-reason-item p {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+/* =========================================
+   COMPACT ML RISK CARD
+========================================= */
+
+.ml-risk-card {
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* Probability section */
+.ml-risk-card .ml-probabilities {
+  margin-top: 14px;
+  gap: 7px;
+}
+
+/* Risk factors section */
+.ml-risk-card .ml-reasons {
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* Risk factor heading */
+.ml-risk-card .ml-reasons > strong {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 14px;
+}
+
+/* Scrollable factors */
+.ml-risk-card .ml-reason-list {
+  max-height: 145px;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding-right: 4px;
+}
+
+/* Each factor */
+.ml-risk-card .ml-reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+/* Warning icon */
+.ml-risk-card .ml-reason-dot {
+  flex-shrink: 0;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+/* Factor text */
+.ml-risk-card .ml-reason-item p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.ml-risk-card .ml-reason-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ml-risk-card .ml-reason-list::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 10px;
+}
+
+.dark .ml-reasons > strong {
+  color: #f8fafc;
+}
+
+.dark .ml-reason-item p {
+  color: #9fb0c9;
+}
+
+.dark .ml-probabilities span {
+  color: #9fb0c9;
+}
+
+.dark .ml-probabilities strong {
+  color: #dbe5f5;
+}
+
+/* =========================================
+   FIX ML RISK CARD CONTENT
+========================================= */
+
+.ml-risk-card {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100%;
+}
+
+.ml-reasons {
+  overflow: visible !important;
+}
+
+.ml-reason-list {
+  overflow: visible !important;
+}
+
+.ml-reason-item {
+  overflow: visible !important;
+}
+
+.exposure span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.exposure strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.dark .exposure span {
+  color: #9aa8bd;
+}
+
+.dark .exposure strong {
+  color: #ffffff;
+}
+.dark .critical-title {
+  color: #ff6b61;
+}
+
+.dark .high-title {
+  color: #f5b544;
+}

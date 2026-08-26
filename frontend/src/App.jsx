@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import "./App.css";
 
-const API_URL = "https://merchant-autopilot.onrender.com";
+const API_URL = "http://localhost:5000";
 const MERCHANT_ID = "6a89dccdcc29ecf53a7612f3";
 
 function App() {
@@ -62,6 +62,7 @@ function App() {
   const fetchIntelligence = async () => {
     try {
       setLoading(true);
+      setWhatIfResult(null);
       setError("");
 
       const [intelligenceResponse, mlResponse] = await Promise.all([
@@ -70,6 +71,7 @@ function App() {
       ]);
 
       setData(intelligenceResponse.data.data);
+      console.log("FRONTEND ML RESPONSE:", mlResponse.data.data);
       setMlRisk(mlResponse.data.data);
     } catch (err) {
       console.error(err);
@@ -141,7 +143,13 @@ function App() {
         <h2>Connection Error</h2>
         <p>{error}</p>
 
-        <button className="refresh-button" onClick={fetchIntelligence}>
+        <button
+          className="refresh-button"
+          onClick={() => {
+            setWhatIfResult(null);
+            fetchIntelligence();
+          }}
+        >
           <RefreshCw size={18} />
           Retry
         </button>
@@ -187,8 +195,19 @@ function App() {
             {darkMode ? "Light" : "Dark"}
           </button>
 
-          <button className="refresh-button" onClick={fetchIntelligence}>
-            <RefreshCw size={17} />
+          <button
+            className="refresh-button"
+            onClick={() => {
+              setWhatIfResult(null);
+              setDiscountPercent(0);
+              setSalesChangePercent(0);
+              setRtoChangePercent(0);
+              setRefundChangePercent(0);
+              setPaymentFailureChangePercent(0);
+              setChargebackChangePercent(0);
+              fetchIntelligence();
+            }}
+          >
             Refresh
           </button>
         </div>
@@ -277,12 +296,50 @@ function App() {
                   )}% confidence`
                 : "Analyzing..."}
             </span>
+
+            {mlRisk?.prediction?.probabilities && (
+              <div className="ml-probabilities">
+                <div>
+                  <span>Critical</span>
+                  <strong>
+                    {Math.round(mlRisk.prediction.probabilities.critical * 100)}
+                    %
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Warning</span>
+                  <strong>
+                    {Math.round(mlRisk.prediction.probabilities.warning * 100)}%
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Healthy</span>
+                  <strong>
+                    {Math.round(mlRisk.prediction.probabilities.healthy * 100)}%
+                  </strong>
+                </div>
+              </div>
+            )}
+
+            {mlRisk?.reasons?.length > 0 && (
+              <div className="ml-reasons">
+                <strong>Risk Factors</strong>
+
+                <div className="ml-reason-list">
+                  {mlRisk.reasons.map((reason, index) => (
+                    <div className="ml-reason-item" key={index}>
+                      <span className="ml-reason-dot">⚠</span>
+                      <p>{reason}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* ==================================================
-    ISSUES + INSIGHT
-================================================== */}
         {/* ==================================================
             ISSUES + INSIGHT
         ================================================== */}
@@ -459,7 +516,7 @@ function App() {
 
           {/* ==================================================
               WHAT-IF RESULT
-================================================== */}
+          ================================================== */}
           {whatIfResult && (
             <>
               <div className="scenario-risk">
@@ -584,33 +641,66 @@ function App() {
                             return <div key={index} className="ai-space" />;
                           }
 
-                          if (trimmedLine.startsWith("**SUMMARY:**")) {
+                          // Clean markdown bullets and stars around headings
+                          const normalizedLine = trimmedLine
+                            .replace(/^[-•]\s*/, "")
+                            .replace(/^\*+/, "")
+                            .replace(/\*+$/, "")
+                            .trim();
+
+                          const upperLine = normalizedLine.toUpperCase();
+
+                          // SECTION HEADINGS
+                          if (
+                            upperLine === "SUMMARY:" ||
+                            upperLine === "SUMMARY"
+                          ) {
                             return <h3 key={index}>Summary</h3>;
                           }
 
-                          if (trimmedLine.startsWith("**FINANCIAL IMPACT:**")) {
+                          if (
+                            upperLine === "FINANCIAL IMPACT:" ||
+                            upperLine === "FINANCIAL IMPACT"
+                          ) {
                             return <h3 key={index}>Financial Impact</h3>;
                           }
 
-                          if (trimmedLine.startsWith("**RECOMMENDATION:**")) {
+                          if (
+                            upperLine === "RECOMMENDATION:" ||
+                            upperLine === "RECOMMENDATION"
+                          ) {
                             return <h3 key={index}>Recommendation</h3>;
                           }
 
-                          if (trimmedLine.startsWith("**EXPLANATION:**")) {
+                          if (
+                            upperLine === "EXPLANATION:" ||
+                            upperLine === "EXPLANATION"
+                          ) {
                             return <h3 key={index}>Explanation</h3>;
                           }
 
-                          if (trimmedLine.startsWith("**NEXT STEP:**")) {
+                          if (
+                            upperLine === "NEXT STEP:" ||
+                            upperLine === "NEXT STEP"
+                          ) {
                             return <h3 key={index}>Next Step</h3>;
                           }
 
                           return (
                             <p key={index}>
-                              {trimmedLine
-                                .replace(/^\*\s*/, "• ")
-                                .replace(/^\d+\.\s*/, (match) => match)}
+                              {normalizedLine.replace(
+                                /^\d+\.\s*/,
+                                (match) => match,
+                              )}
                             </p>
                           );
+
+                          // Remove remaining markdown bold
+                          let cleanLine = normalizedLine
+                            .replace(/\*\*/g, "")
+                            .trim();
+
+                          return <p key={index}>{cleanLine}</p>;
                         })}
                     </div>
                   </div>
@@ -660,18 +750,22 @@ function ScenarioInput({ label, value, onChange, min, max }) {
 // ==================================================
 
 function ScenarioCard({ label, value, plain = false }) {
+  const formattedValue = plain
+    ? Number(value || 0).toLocaleString("en-IN")
+    : `₹${Number(value || 0).toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}`;
+
   return (
     <div className="scenario-card">
       <span>{label}</span>
 
-      <strong>
-        {plain
-          ? Number(value).toLocaleString("en-IN")
-          : `₹${Number(value).toLocaleString("en-IN")}`}
-      </strong>
+      <strong>{formattedValue}</strong>
     </div>
   );
 }
+
 
 // ==================================================
 // METRIC CARD
@@ -714,7 +808,11 @@ function Issue({ issue, severity }) {
         <strong>{issue.message}</strong>
 
         <span>
-          Change: <b>+{issue.change}%</b>
+          Change:{" "}
+          <b>
+            {issue.change > 0 ? "+" : ""}
+            {issue.change}%
+          </b>
         </span>
       </div>
     </div>

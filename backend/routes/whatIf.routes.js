@@ -11,6 +11,63 @@ router.post("/:merchantId/what-if", async (req, res) => {
   try {
     const { merchantId } = req.params;
 
+    const {
+      discountPercent = 0,
+      salesChangePercent = 0,
+      rtoChangePercent = 0,
+      refundChangePercent = 0,
+      paymentFailureChangePercent = 0,
+      chargebackChangePercent = 0,
+    } = req.body;
+
+    const scenarioValues = {
+      discountPercent,
+      salesChangePercent,
+      rtoChangePercent,
+      refundChangePercent,
+      paymentFailureChangePercent,
+      chargebackChangePercent,
+    };
+
+    const hasInvalidValue = Object.values(scenarioValues).some(
+      (value) => !Number.isFinite(Number(value)),
+    );
+
+    if (hasInvalidValue) {
+      return res.status(400).json({
+        success: false,
+        message: "All scenario values must be valid numbers.",
+      });
+    }
+
+    if (Number(discountPercent) < 0 || Number(discountPercent) > 100) {
+      return res.status(400).json({
+        success: false,
+        message: "Discount must be between 0% and 100%.",
+      });
+    }
+
+    if (Number(salesChangePercent) < -100) {
+      return res.status(400).json({
+        success: false,
+        message: "Sales change cannot be below -100%.",
+      });
+    }
+
+    const operationalChanges = [
+      rtoChangePercent,
+      refundChangePercent,
+      paymentFailureChangePercent,
+      chargebackChangePercent,
+    ];
+
+    if (operationalChanges.some((value) => Number(value) < -100)) {
+      return res.status(400).json({
+        success: false,
+        message: "Operational rate changes cannot be below -100%.",
+      });
+    }
+
     const merchant = await Merchant.findById(merchantId);
 
     if (!merchant) {

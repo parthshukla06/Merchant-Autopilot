@@ -1,4 +1,5 @@
 const { calculateRiskScore } = require("../services/riskEngine");
+const { spawn } = require("child_process");
 const { calculateAnomalies } = require("../services/anomalyEngine");
 const { generateRecommendations } = require("../services/recommendationEngine");
 const {
@@ -358,7 +359,9 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
   try {
     const { merchantId } = req.params;
 
+    // -----------------------------------------
     // Find merchant
+    // -----------------------------------------
     const merchant = await Merchant.findById(merchantId);
 
     if (!merchant) {
@@ -368,16 +371,25 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
       });
     }
 
-    // Find all transactions for this merchant
+    // -----------------------------------------
+    // Find transactions
+    // -----------------------------------------
     const transactions = await Transaction.find({
       merchantId,
     });
 
     const transactionVolume = transactions.length;
 
-    // -----------------------------
+    if (transactionVolume === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No transactions found for this merchant",
+      });
+    }
+
+    // -----------------------------------------
     // Transaction metrics
-    // -----------------------------
+    // -----------------------------------------
 
     const failedTransactions = transactions.filter(
       (transaction) => transaction.transactionStatus === "failed",
@@ -399,95 +411,144 @@ router.get("/:merchantId/ml-risk", async (req, res) => {
       (transaction) => transaction.isCOD === true,
     ).length;
 
-    // -----------------------------
+    // -----------------------------------------
     // Calculate rates
-    // -----------------------------
+    // -----------------------------------------
 
-    const paymentFailureRate =
-      transactionVolume > 0
-        ? (failedTransactions / transactionVolume) * 100
-        : 0;
+    const paymentFailureRate = (failedTransactions / transactionVolume) * 100;
 
-    const paymentSuccessRate = 100 - paymentFailureRate;
+    const rtoRate = (rtoTransactions / transactionVolume) * 100;
 
-    const rtoRate =
-      transactionVolume > 0 ? (rtoTransactions / transactionVolume) * 100 : 0;
+    const chargebackRate = (chargebackTransactions / transactionVolume) * 100;
 
-    const chargebackRate =
-      transactionVolume > 0
-        ? (chargebackTransactions / transactionVolume) * 100
-        : 0;
+    const refundRate = (refundedTransactions / transactionVolume) * 100;
 
-    const refundRate =
-      transactionVolume > 0
-        ? (refundedTransactions / transactionVolume) * 100
-        : 0;
-
-    const codPercentage =
-      transactionVolume > 0 ? (codTransactions / transactionVolume) * 100 : 0;
+    const codPercentage = (codTransactions / transactionVolume) * 100;
 
     const averageTransactionValue =
-      transactionVolume > 0
-        ? transactions.reduce(
-            (total, transaction) => total + Number(transaction.amount || 0),
-            0,
-          ) / transactionVolume
-        : 0;
+      transactions.reduce(
+        (total, transaction) => total + Number(transaction.amount || 0),
+        0,
+      ) / transactionVolume;
 
-    // -----------------------------
-    // Features returned to frontend
-    // -----------------------------
+    // -----------------------------------------
+    // Features
+    // -----------------------------------------
 
     const features = {
       transaction_volume: transactionVolume,
-      payment_failure_rate: paymentFailureRate,
-      rto_rate: rtoRate,
-      chargeback_rate: chargebackRate,
-      refund_rate: refundRate,
-      cod_percentage: codPercentage,
-      average_transaction_value: averageTransactionValue,
+      payment_failure_rate: Number(paymentFailureRate.toFixed(2)),
+      rto_rate: Number(rtoRate.toFixed(2)),
+      refund_rate: Number(refundRate.toFixed(2)),
+      chargeback_rate: Number(chargebackRate.toFixed(2)),
+      cod_percentage: Number(codPercentage.toFixed(2)),
+      average_transaction_value: Number(averageTransactionValue.toFixed(2)),
     };
 
-    // -----------------------------
-    // Calculate risk directly
-    // No Python ML service
-    // No localhost:8000
-    // -----------------------------
+    console.log("ML FEATURES:", features);
 
-    const riskResult = calculateRiskScore({
-      chargebackRate,
-      refundRate,
-      rtoRate,
-      paymentSuccessRate,
+    // -----------------------------------------
+    // Run Python ML model
+    // -----------------------------------------
 
-      // Keep cash-flow component neutral here.
-      // Risk is calculated from transaction behaviour.
-      averageDailyRevenue: 1,
-      averageDailyExpenses: 0,
+    const pythonProcess = spawn("python", [
+      require("path").join(__dirname, "../ml/predict.py"),
+    ]);
+
+    let pythonOutput = "";
+    let pythonError = "";
+
+    pythonProcess.stdin.write(JSON.stringify(features));
+    pythonProcess.stdin.end();
+
+    pythonProcess.stdout.on("data", (data) => {
+      pythonOutput += data.toString();
     });
 
-    // -----------------------------
-    // Final response
-    // -----------------------------
+    pythonProcess.stderr.on("data", (data) => {
+      pythonError += data.toString();
+    });
 
-    return res.status(200).json({
-      success: true,
-      message: "Merchant ML risk predicted successfully",
+    pythonProcess.on("close", (code) => {
+      if (code !== 0) {
+        console.error("Python ML error:", pythonError);
 
-      data: {
-        merchantId: merchant._id,
-        businessName: merchant.businessName,
+        return res.status(500).json({
+          success: false,
+          message: "ML prediction failed",
+          error: pythonError,
+        });
+      }
 
-        features,
+      try {
+        const prediction = JSON.parse(pythonOutput.trim());
 
-        prediction: {
-          risk: riskResult.level,
-          riskProbability: riskResult.score / 100,
-        },
+        if (prediction.error) {
+          return res.status(500).json({
+            success: false,
+            message: "ML prediction failed",
+            error: prediction.error,
+          });
+        }
 
-        score: riskResult.score,
-        reasons: riskResult.reasons,
-      },
+        // -----------------------------------------
+        // Final response
+        // -----------------------------------------
+
+        return res.status(200).json({
+          success: true,
+          message: "Merchant ML risk predicted successfully",
+
+          data: {
+            merchantId: merchant._id,
+            businessName: merchant.businessName,
+
+            features,
+
+            prediction: {
+              risk: prediction.risk,
+              riskProbability: prediction.riskProbability,
+              probabilities: prediction.probabilities,
+            },
+
+            score: Math.round(prediction.riskProbability * 100),
+
+            reasons: [
+              ...(chargebackRate >= 3
+                ? [`High chargeback rate (${chargebackRate.toFixed(2)}%)`]
+                : []),
+
+              ...(rtoRate >= 10
+                ? [`High RTO rate (${rtoRate.toFixed(2)}%)`]
+                : []),
+
+              ...(paymentFailureRate >= 8
+                ? [
+                    `High payment failure rate (${paymentFailureRate.toFixed(2)}%)`,
+                  ]
+                : []),
+
+              ...(refundRate >= 7
+                ? [`High refund rate (${refundRate.toFixed(2)}%)`]
+                : []),
+
+              ...(codPercentage >= 40
+                ? [`High COD dependency (${codPercentage.toFixed(2)}%)`]
+                : []),
+            ],
+          },
+        });
+      } catch (parseError) {
+        console.error("ML response parse error:", parseError.message);
+
+        console.error("Python output:", pythonOutput);
+
+        return res.status(500).json({
+          success: false,
+          message: "Invalid ML prediction response",
+          error: parseError.message,
+        });
+      }
     });
   } catch (error) {
     console.error("ML risk prediction error:", error);
