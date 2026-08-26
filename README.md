@@ -397,9 +397,12 @@ Chargebacks
 
 Finally, the system calculates:
 
+```text
 Scenario Profit
 Profit Change
 Recommendation
+```
+
 ## 📸 Screenshots
 
 ### Dashboard
