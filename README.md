@@ -2,6 +2,20 @@
 
 ### AI-Powered Merchant Risk & Decision Intelligence Platform
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success)](https://merchant-autopilot.vercel.app/)
+[![Frontend](https://img.shields.io/badge/Frontend-Vercel-black)](https://merchant-autopilot.vercel.app/)
+[![Backend](https://img.shields.io/badge/Backend-Render-purple)](https://merchant-autopilot.onrender.com/)
+
+> A full-stack decision intelligence platform that helps online merchants analyze operational risk, simulate business scenarios, evaluate financial impact, and receive actionable recommendations.
+
+ ## ⚡ What Makes Merchant Autopilot Different?
+
+Most dashboards explain **what happened**.
+
+Merchant Autopilot goes further:
+
+**What happened → What could happen → What should I do?**
+
 Merchant Autopilot is a full-stack business intelligence platform that helps online merchants understand operational risks, simulate business decisions, and receive actionable recommendations.
 
 It combines:
