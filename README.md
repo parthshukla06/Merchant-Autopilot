@@ -290,9 +290,12 @@ Merchant-Autopilot/
 └── README.md
 
 ⚙️ Installation
+
+
 1. Clone Repository
 git clone https://github.com/parthshukla06/Merchant-Autopilot.git
 cd Merchant-Autopilot
+
 2. Backend Setup
 cd backend
 npm install
@@ -306,6 +309,7 @@ OPENAI_API_KEY=your_openai_api_key
 Start the backend:
 
 npm run dev
+
 3. Python ML Dependencies
 
 From the backend directory:
@@ -318,6 +322,7 @@ joblib
 scikit-learn
 numpy
 pandas
+
 4. Frontend Setup
 
 Open another terminal:
@@ -329,6 +334,7 @@ npm run dev
 The frontend will run on the Vite development server.
 
 🔌 API Endpoints
+
 Merchant Intelligence
 GET /api/merchants/:merchantId/intelligence
 
@@ -362,6 +368,7 @@ Financial impact
 Recovery estimates
 Recommendation
 Business advice
+
 🧮 Business Logic
 
 The What-If engine calculates scenario values using the merchant's current metrics.
@@ -425,6 +432,7 @@ Chargeback improvements
 Invalid input values
 Multiple scenario runs
 Dynamic analytics updates
+
 🎯 Project Goals
 
 Merchant Autopilot transforms merchant analytics from:
@@ -434,7 +442,9 @@ Merchant Autopilot transforms merchant analytics from:
 "What could happen?"
         ↓
 "What should I do?"
+
 🚀 Future Improvements
+
 Automated merchant alerts
 Historical scenario tracking
 Advanced ML risk models
