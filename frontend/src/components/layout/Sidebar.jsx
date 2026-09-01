@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   ShieldAlert,
@@ -6,9 +6,11 @@ import {
   BarChart3,
   FlaskConical,
   Sparkles,
-  Settings,
   Activity,
+  LogOut,
 } from "lucide-react";
+
+import { logout, getUser } from "../../auth/auth";
 
 const navigation = [
   {
@@ -44,6 +46,17 @@ const navigation = [
 ];
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const user = getUser();
+
+  const handleLogout = () => {
+    logout();
+
+    navigate("/login", {
+      replace: true,
+    });
+  };
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -56,10 +69,15 @@ function Sidebar() {
       </div>
 
       <div className="merchant-mini">
-        <div className="merchant-avatar">U</div>
+        <div className="merchant-avatar">
+          {user?.name?.charAt(0)?.toUpperCase() || "U"}
+        </div>
 
         <div>
-          <strong>UrbanCart India</strong>
+          <strong>
+            {user?.name || "Merchant"}
+          </strong>
+
           <span>Merchant account</span>
         </div>
       </div>
@@ -67,43 +85,49 @@ function Sidebar() {
       <nav className="sidebar-nav">
         <p className="nav-heading">WORKSPACE</p>
 
-        {navigation.map(({ label, path, icon: Icon }) => (
-          <NavLink
-            key={path}
-            to={path}
-            end={path === "/"}
-            className={({ isActive }) =>
-              `nav-item ${isActive ? "active" : ""}`
-            }
-          >
-            <Icon size={18} strokeWidth={1.9} />
-            <span>{label}</span>
-          </NavLink>
-        ))}
+        {navigation.map(
+          ({ label, path, icon: Icon }) => (
+            <NavLink
+              key={path}
+              to={path}
+              end={path === "/"}
+              className={({ isActive }) =>
+                `nav-item ${isActive ? "active" : ""}`
+              }
+            >
+              <Icon
+                size={18}
+                strokeWidth={1.9}
+              />
+
+              <span>{label}</span>
+            </NavLink>
+          )
+        )}
       </nav>
 
       <div className="sidebar-bottom">
         <div className="sidebar-divider" />
 
-        <NavLink
-          to="/settings"
-          className="nav-item"
-          onClick={(event) => event.preventDefault()}
+        <button
+          type="button"
+          className="nav-item sidebar-logout"
+          onClick={handleLogout}
         >
-          <Settings size={18} />
-          <span>Settings</span>
-        </NavLink>
+          <LogOut size={18} />
+
+          <span>Logout</span>
+        </button>
 
         <div className="system-status">
           <span className="status-dot" />
 
           <div>
-            <strong>System Online</strong>
+            <strong>
+              {user?.name || "Merchant"}
+            </strong>
 
-            <span>
-              <Activity size={12} />
-              All services operational
-            </span>
+            <span>Account secured</span>
           </div>
         </div>
       </div>
