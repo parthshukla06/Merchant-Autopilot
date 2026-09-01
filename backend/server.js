@@ -43,6 +43,9 @@ const transactionRoutes =
 const whatIfRoutes =
     require("./routes/whatIf.routes");
 
+const authRoutes =
+    require("./routes/auth.routes");
+
 app.use(
     "/api/merchants",
     merchantRoutes
@@ -56,6 +59,11 @@ app.use(
 app.use(
     "/api/merchants",
     whatIfRoutes
+);
+
+app.use(
+    "/api/auth",
+    authRoutes
 );
 
 // -----------------------------
