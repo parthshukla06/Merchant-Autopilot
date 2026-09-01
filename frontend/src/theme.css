@@ -1,0 +1,1349 @@
+/* ============================================================
+   MERCHANT AUTOPILOT
+   GLOBAL DAY / NIGHT THEME
+   ============================================================ */
+
+
+/* ============================================================
+   DAY MODE — DEFAULT
+   ============================================================ */
+
+:root {
+  --ma-bg: #f5f7fb;
+  --ma-surface: #ffffff;
+  --ma-surface-soft: #f8fafc;
+  --ma-surface-muted: #eef2f7;
+
+  --ma-text: #172033;
+  --ma-text-strong: #111827;
+  --ma-text-secondary: #53637a;
+  --ma-text-muted: #8190a5;
+
+  --ma-border: #e1e7ef;
+  --ma-border-strong: #d5dce7;
+
+  --ma-input: #ffffff;
+  --ma-input-text: #172033;
+
+  --ma-sidebar: #0b1424;
+  --ma-sidebar-card: #142238;
+}
+
+
+/* ============================================================
+   NIGHT MODE
+   ============================================================ */
+
+html[data-theme="night"] {
+  --ma-bg: #080f1d;
+  --ma-surface: #101a2b;
+  --ma-surface-soft: #132036;
+  --ma-surface-muted: #17243a;
+
+  --ma-text: #f5f7fb;
+  --ma-text-strong: #ffffff;
+  --ma-text-secondary: #b5c1d2;
+  --ma-text-muted: #8493a8;
+
+  --ma-border: #293a53;
+  --ma-border-strong: #3a4d69;
+
+  --ma-input: #101a2b;
+  --ma-input-text: #f5f7fb;
+
+  --ma-sidebar: #080f1d;
+  --ma-sidebar-card: #142238;
+}
+
+
+/* ============================================================
+   ROOT
+   ============================================================ */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  background: var(--ma-bg) !important;
+}
+
+body {
+  margin: 0;
+  background: var(--ma-bg) !important;
+  color: var(--ma-text) !important;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: var(--ma-bg) !important;
+  color: var(--ma-text) !important;
+}
+
+.main-content {
+  background: var(--ma-bg) !important;
+  color: var(--ma-text) !important;
+}
+
+
+/* ============================================================
+   PAGE BACKGROUNDS
+   ============================================================ */
+
+.page,
+.overview-page,
+.risk-page,
+.transactions-page,
+.analytics-page,
+.what-if-page,
+.ai-advisor-page {
+  background: var(--ma-bg) !important;
+  color: var(--ma-text) !important;
+}
+
+
+/* ============================================================
+   GLOBAL TEXT
+   ============================================================ */
+
+.page h1,
+.page h2,
+.page h3,
+.page h4,
+.page h5,
+.page strong,
+
+.overview-page h1,
+.overview-page h2,
+.overview-page h3,
+.overview-page h4,
+.overview-page h5,
+
+.risk-page h1,
+.risk-page h2,
+.risk-page h3,
+.risk-page h4,
+.risk-page h5,
+
+.transactions-page h1,
+.transactions-page h2,
+.transactions-page h3,
+.transactions-page h4,
+.transactions-page h5,
+
+.analytics-page h1,
+.analytics-page h2,
+.analytics-page h3,
+.analytics-page h4,
+.analytics-page h5,
+
+.what-if-page h1,
+.what-if-page h2,
+.what-if-page h3,
+.what-if-page h4,
+.what-if-page h5,
+
+.ai-advisor-page h1,
+.ai-advisor-page h2,
+.ai-advisor-page h3,
+.ai-advisor-page h4,
+.ai-advisor-page h5 {
+  color: var(--ma-text-strong) !important;
+}
+
+
+/* normal descriptive text */
+
+.page p,
+.page label,
+
+.overview-page p,
+.overview-page label,
+
+.risk-page p,
+.risk-page label,
+
+.transactions-page p,
+.transactions-page label,
+
+.analytics-page p,
+.analytics-page label,
+
+.what-if-page p,
+.what-if-page label,
+
+.ai-advisor-page p,
+.ai-advisor-page label {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* ============================================================
+   COMMON CARD SURFACES
+   ============================================================ */
+
+.card,
+.panel,
+.stat-card,
+.metric-card,
+.chart-card,
+
+.risk-card,
+.risk-summary-card,
+.driver-card,
+.risk-driver-card,
+
+.analytics-card,
+
+.transaction-card,
+.transactions-card,
+.transactions-table-card,
+
+.what-if-card,
+.simulator-card,
+.scenario-card,
+.result-card,
+
+.ai-card,
+.ai-panel,
+.ai-insight-card,
+.ai-explanation-card,
+.recommendation-card,
+.financial-card,
+.ai-financial-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+  color: var(--ma-text) !important;
+}
+
+
+/* ============================================================
+   OVERVIEW — IMPORTANT VISIBILITY FIXES
+   ============================================================ */
+
+.overview-page .business-health-card,
+.overview-page .health-card,
+.overview-page .overview-card,
+.overview-page .financial-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+/* Business health text */
+
+.overview-page .business-health-card h2,
+.overview-page .business-health-card h3,
+.overview-page .business-health-card strong {
+  color: var(--ma-text-strong) !important;
+}
+
+.overview-page .business-health-card p,
+.overview-page .business-health-card span {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* Financial values */
+
+.overview-page .metric-card strong,
+.overview-page .financial-card strong {
+  color: var(--ma-text-strong) !important;
+}
+
+.overview-page .metric-card h3,
+.overview-page .metric-card h4 {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* Overview lower cards */
+
+.overview-page .risk-intelligence-card,
+.overview-page .detected-issues-card,
+.overview-page .action-plan-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+}
+
+.overview-page .risk-intelligence-card h2,
+.overview-page .risk-intelligence-card h3,
+.overview-page .detected-issues-card h2,
+.overview-page .detected-issues-card h3,
+.overview-page .action-plan-card h2,
+.overview-page .action-plan-card h3 {
+  color: var(--ma-text-strong) !important;
+}
+
+
+/* ============================================================
+   RISK — CRITICAL VISIBILITY
+   ============================================================ */
+
+.risk-page .risk-summary-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+/* Critical status must always be readable */
+
+.risk-page .risk-summary-card .critical,
+.risk-page .risk-summary-card .risk-level,
+.risk-page .risk-summary-card .prediction,
+.risk-page .risk-summary-card .prediction-level {
+  color: #ef4444 !important;
+  font-weight: 800 !important;
+}
+
+
+/* Risk title */
+
+.risk-page .risk-summary-card h2,
+.risk-page .risk-summary-card h3 {
+  color: var(--ma-text-strong) !important;
+}
+
+
+/* Risk drivers */
+
+.risk-page .driver-card,
+.risk-page .risk-driver-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+}
+
+.risk-page .driver-card h3,
+.risk-page .driver-card strong,
+.risk-page .risk-driver-card h3,
+.risk-page .risk-driver-card strong {
+  color: var(--ma-text-strong) !important;
+}
+
+.risk-page .driver-card p,
+.risk-page .risk-driver-card p {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* ============================================================
+   TRANSACTIONS
+   ============================================================ */
+
+.transactions-page .transactions-table,
+.transactions-page .table-container,
+.transactions-page .transactions-content,
+.transactions-page .transactions-table-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+.transactions-page table {
+  background: var(--ma-surface) !important;
+  color: var(--ma-text) !important;
+}
+
+
+.transactions-page thead,
+.transactions-page thead tr {
+  background: var(--ma-surface-soft) !important;
+}
+
+
+.transactions-page th {
+  color: var(--ma-text-secondary) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+.transactions-page td {
+  color: var(--ma-text) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+/* Search */
+
+.transactions-page input,
+.transactions-page select {
+  background: var(--ma-input) !important;
+  color: var(--ma-input-text) !important;
+  border-color: var(--ma-border) !important;
+}
+
+.transactions-page input::placeholder {
+  color: var(--ma-text-muted) !important;
+}
+
+
+/* ============================================================
+   ANALYTICS
+   ============================================================ */
+
+.analytics-page .chart-card,
+.analytics-page .analytics-card,
+.analytics-page .metric-card,
+.analytics-page .stat-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+  color: var(--ma-text) !important;
+}
+
+.analytics-page .chart-card h2,
+.analytics-page .chart-card h3,
+.analytics-page .analytics-card h2,
+.analytics-page .analytics-card h3 {
+  color: var(--ma-text-strong) !important;
+}
+
+.analytics-page .chart-card p,
+.analytics-page .analytics-card p {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* Recharts */
+
+.analytics-page .recharts-cartesian-axis-tick-value {
+  fill: var(--ma-text-muted) !important;
+}
+
+.analytics-page .recharts-cartesian-axis-line,
+.analytics-page .recharts-yAxis line,
+.analytics-page .recharts-xAxis line {
+  stroke: var(--ma-border) !important;
+}
+
+.analytics-page .recharts-cartesian-grid line {
+  stroke: var(--ma-border) !important;
+}
+
+
+/* Donut center */
+
+.analytics-page .recharts-pie-label-text {
+  fill: var(--ma-text) !important;
+}
+
+
+/* ============================================================
+   WHAT-IF — ENTIRE PAGE
+   ============================================================ */
+
+.what-if-page .scenario-input-card,
+.what-if-page .input-card,
+.what-if-page .scenario-card,
+.what-if-page .result-card,
+.what-if-page .metric-card,
+.what-if-page .simulator-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+  color: var(--ma-text) !important;
+}
+
+
+/* headings */
+
+.what-if-page .scenario-input-card h2,
+.what-if-page .scenario-input-card h3,
+.what-if-page .input-card h3,
+.what-if-page .scenario-card h2,
+.what-if-page .scenario-card h3,
+.what-if-page .result-card h2,
+.what-if-page .result-card h3 {
+  color: var(--ma-text-strong) !important;
+}
+
+
+/* descriptions */
+
+.what-if-page .scenario-input-card p,
+.what-if-page .input-card p,
+.what-if-page .scenario-card p {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* inputs */
+
+.what-if-page input {
+  background: var(--ma-input) !important;
+  color: var(--ma-input-text) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+/* slider labels */
+
+.what-if-page .slider-label,
+.what-if-page .range-label {
+  color: var(--ma-text-muted) !important;
+}
+
+
+/* Results */
+
+.what-if-page .result-card strong,
+.what-if-page .result-card .value {
+  color: var(--ma-text-strong) !important;
+}
+
+
+/* ============================================================
+   AI ADVISOR — ENTIRE PAGE
+   ============================================================ */
+
+.ai-advisor-page .ai-hero,
+.ai-advisor-page .ai-financial-card,
+.ai-advisor-page .ai-insight-card,
+.ai-advisor-page .ai-panel,
+.ai-advisor-page .recommendation-card,
+.ai-advisor-page .ai-explanation-card {
+  background: var(--ma-surface) !important;
+  border-color: var(--ma-border) !important;
+  color: var(--ma-text) !important;
+}
+
+
+/* headings */
+
+.ai-advisor-page .ai-section-heading h2,
+.ai-advisor-page .ai-panel-heading h2,
+.ai-advisor-page .recommendation-title h2,
+.ai-advisor-page .ai-explanation-header h2,
+.ai-advisor-page .ai-insight-card h2 {
+  color: var(--ma-text-strong) !important;
+}
+
+
+/* body */
+
+.ai-advisor-page .ai-section-heading span,
+.ai-advisor-page .ai-panel-heading span,
+.ai-advisor-page .ai-insight-card p,
+.ai-advisor-page .ai-explanation-card p,
+.ai-advisor-page .recommendation-card p {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* financial cards */
+
+.ai-advisor-page .ai-financial-card strong {
+  color: var(--ma-text-strong) !important;
+}
+
+.ai-advisor-page .ai-financial-card span,
+.ai-advisor-page .ai-financial-card small {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* Explanation cards */
+
+.ai-advisor-page .ai-explanation-card {
+  background: var(--ma-surface) !important;
+}
+
+.ai-advisor-page .ai-explanation-card strong {
+  color: var(--ma-text-strong) !important;
+}
+
+.ai-advisor-page .ai-explanation-card p {
+  color: var(--ma-text-secondary) !important;
+}
+
+
+/* ============================================================
+   GLOBAL INPUTS
+   ============================================================ */
+
+input,
+select,
+textarea {
+  background: var(--ma-input) !important;
+  color: var(--ma-input-text) !important;
+  border-color: var(--ma-border) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ma-text-muted) !important;
+}
+
+
+/* ============================================================
+   BUTTONS THAT ARE WHITE IN DAY MODE
+   In night mode they become dark surfaces.
+   ============================================================ */
+
+html[data-theme="night"] .refresh-button,
+html[data-theme="night"] .download-button,
+html[data-theme="night"] .date-button,
+html[data-theme="night"] .filter-button {
+  background: var(--ma-surface) !important;
+  color: var(--ma-text-strong) !important;
+  border-color: var(--ma-border) !important;
+}
+
+
+/* ============================================================
+   SIDEBAR — ALWAYS DARK
+   ============================================================ */
+
+.sidebar {
+  background: var(--ma-sidebar) !important;
+  color: #ffffff !important;
+
+  height: 100vh;
+  max-height: 100vh;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+}
+
+.sidebar .brand-copy strong,
+.sidebar .merchant-mini strong {
+  color: #ffffff !important;
+}
+
+.sidebar .brand-copy span,
+.sidebar .merchant-mini span {
+  color: #9fb0c8 !important;
+}
+
+.sidebar .nav-heading {
+  color: #6f84a2 !important;
+}
+
+.sidebar .nav-item {
+  color: #9fb0c8 !important;
+}
+
+.sidebar .nav-item.active,
+.sidebar .nav-item:hover {
+  color: #ffffff !important;
+}
+
+
+/* ============================================================
+   TOGGLE
+   ============================================================ */
+
+.theme-toggle-row {
+  width: 100%;
+  min-height: 52px;
+
+  padding: 0 12px 0 14px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+
+  background: #142238 !important;
+  color: #ffffff !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.theme-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle-label svg {
+  color: #d8e1ed !important;
+}
+
+.theme-toggle-label span {
+  color: #d8e1ed !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+/* switch */
+
+.theme-switch {
+  width: 42px;
+  height: 24px;
+
+  padding: 3px;
+
+  border-radius: 999px;
+
+  background: #34445e;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+.theme-switch-knob {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  transform: translateX(0);
+
+  transition: transform 0.2s ease;
+}
+
+.theme-switch.on {
+  background: #6577e8;
+}
+
+.theme-switch.on .theme-switch-knob {
+  transform: translateX(18px);
+}
+
+
+/* ============================================================
+   SIDEBAR SCROLL
+   ============================================================ */
+
+.sidebar-bottom {
+  padding-bottom: 20px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 999px;
+}
+
+
+/* ============================================================
+   THEME TRANSITION
+   ============================================================ */
+
+body,
+.app-shell,
+.main-content,
+.page,
+.overview-page,
+.risk-page,
+.transactions-page,
+.analytics-page,
+.what-if-page,
+.ai-advisor-page,
+.card,
+.panel,
+.stat-card,
+.metric-card,
+.chart-card {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* ============================================================
+   FINAL THEME VISIBILITY OVERRIDE
+   Fixes hardcoded white text / white cards across ALL pages
+   ============================================================ */
+
+
+/* ============================================================
+   DAY MODE
+   Existing white-card design stays intact
+   ============================================================ */
+
+html[data-theme="day"] {
+  --ma-bg: #f5f7fb;
+  --ma-surface: #ffffff;
+  --ma-surface-soft: #f8fafc;
+  --ma-surface-muted: #eef2f7;
+
+  --ma-text: #172033;
+  --ma-text-strong: #111827;
+  --ma-text-secondary: #53637a;
+  --ma-text-muted: #8190a5;
+
+  --ma-border: #e1e7ef;
+  --ma-border-strong: #d5dce7;
+
+  --ma-input: #ffffff;
+  --ma-input-text: #172033;
+}
+
+
+/* ============================================================
+   NIGHT MODE
+   ============================================================ */
+
+html[data-theme="night"] {
+  --ma-bg: #080f1d;
+  --ma-surface: #101a2b;
+  --ma-surface-soft: #132036;
+  --ma-surface-muted: #17243a;
+
+  --ma-text: #f5f7fb;
+  --ma-text-strong: #ffffff;
+  --ma-text-secondary: #b7c3d5;
+  --ma-text-muted: #8b9ab0;
+
+  --ma-border: #293a53;
+  --ma-border-strong: #3c506d;
+
+  --ma-input: #101a2b;
+  --ma-input-text: #f5f7fb;
+}
+
+
+/* ============================================================
+   NIGHT — PAGE BACKGROUND
+   ============================================================ */
+
+html[data-theme="night"] body,
+html[data-theme="night"] #root,
+html[data-theme="night"] .app-shell,
+html[data-theme="night"] .main-content,
+html[data-theme="night"] .page,
+html[data-theme="night"] .overview-page,
+html[data-theme="night"] .risk-page,
+html[data-theme="night"] .transactions-page,
+html[data-theme="night"] .analytics-page,
+html[data-theme="night"] .what-if-page,
+html[data-theme="night"] .ai-advisor-page {
+  background: #080f1d !important;
+  color: #f5f7fb !important;
+}
+
+
+/* ============================================================
+   NIGHT — COMMON CARDS
+   ============================================================ */
+
+html[data-theme="night"] .card,
+html[data-theme="night"] .panel,
+html[data-theme="night"] .stat-card,
+html[data-theme="night"] .metric-card,
+html[data-theme="night"] .chart-card,
+html[data-theme="night"] .risk-card,
+html[data-theme="night"] .risk-summary-card,
+html[data-theme="night"] .driver-card,
+html[data-theme="night"] .risk-driver-card,
+html[data-theme="night"] .analytics-card,
+html[data-theme="night"] .transaction-card,
+html[data-theme="night"] .transactions-card,
+html[data-theme="night"] .transactions-table-card,
+html[data-theme="night"] .what-if-card,
+html[data-theme="night"] .simulator-card,
+html[data-theme="night"] .scenario-card,
+html[data-theme="night"] .result-card,
+html[data-theme="night"] .ai-card,
+html[data-theme="night"] .ai-panel,
+html[data-theme="night"] .ai-insight-card,
+html[data-theme="night"] .ai-explanation-card,
+html[data-theme="night"] .recommendation-card,
+html[data-theme="night"] .financial-card,
+html[data-theme="night"] .ai-financial-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+  color: #f5f7fb !important;
+}
+
+
+/* ============================================================
+   NIGHT — FORCE NORMAL TEXT VISIBILITY
+   ============================================================ */
+
+html[data-theme="night"] .page h1,
+html[data-theme="night"] .page h2,
+html[data-theme="night"] .page h3,
+html[data-theme="night"] .page h4,
+html[data-theme="night"] .page h5,
+html[data-theme="night"] .page strong,
+
+html[data-theme="night"] .overview-page h1,
+html[data-theme="night"] .overview-page h2,
+html[data-theme="night"] .overview-page h3,
+html[data-theme="night"] .overview-page h4,
+html[data-theme="night"] .overview-page h5,
+
+html[data-theme="night"] .risk-page h1,
+html[data-theme="night"] .risk-page h2,
+html[data-theme="night"] .risk-page h3,
+html[data-theme="night"] .risk-page h4,
+html[data-theme="night"] .risk-page h5,
+
+html[data-theme="night"] .transactions-page h1,
+html[data-theme="night"] .transactions-page h2,
+html[data-theme="night"] .transactions-page h3,
+html[data-theme="night"] .transactions-page h4,
+html[data-theme="night"] .transactions-page h5,
+
+html[data-theme="night"] .analytics-page h1,
+html[data-theme="night"] .analytics-page h2,
+html[data-theme="night"] .analytics-page h3,
+html[data-theme="night"] .analytics-page h4,
+html[data-theme="night"] .analytics-page h5,
+
+html[data-theme="night"] .what-if-page h1,
+html[data-theme="night"] .what-if-page h2,
+html[data-theme="night"] .what-if-page h3,
+html[data-theme="night"] .what-if-page h4,
+html[data-theme="night"] .what-if-page h5,
+
+html[data-theme="night"] .ai-advisor-page h1,
+html[data-theme="night"] .ai-advisor-page h2,
+html[data-theme="night"] .ai-advisor-page h3,
+html[data-theme="night"] .ai-advisor-page h4,
+html[data-theme="night"] .ai-advisor-page h5 {
+  color: #f5f7fb !important;
+}
+
+
+/* ============================================================
+   NIGHT — PARAGRAPHS / LABELS / SPANS
+   ============================================================ */
+
+html[data-theme="night"] .page p,
+html[data-theme="night"] .page label,
+html[data-theme="night"] .page span,
+
+html[data-theme="night"] .overview-page p,
+html[data-theme="night"] .overview-page label,
+html[data-theme="night"] .overview-page span,
+
+html[data-theme="night"] .risk-page p,
+html[data-theme="night"] .risk-page label,
+html[data-theme="night"] .risk-page span,
+
+html[data-theme="night"] .transactions-page p,
+html[data-theme="night"] .transactions-page label,
+html[data-theme="night"] .transactions-page span,
+
+html[data-theme="night"] .analytics-page p,
+html[data-theme="night"] .analytics-page label,
+html[data-theme="night"] .analytics-page span,
+
+html[data-theme="night"] .what-if-page p,
+html[data-theme="night"] .what-if-page label,
+html[data-theme="night"] .what-if-page span,
+
+html[data-theme="night"] .ai-advisor-page p,
+html[data-theme="night"] .ai-advisor-page label,
+html[data-theme="night"] .ai-advisor-page span {
+  color: #b7c3d5 !important;
+}
+
+
+/* ============================================================
+   NIGHT — OVERVIEW
+   ============================================================ */
+
+html[data-theme="night"] .overview-page .business-health-card,
+html[data-theme="night"] .overview-page .health-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .overview-page .business-health-card h2,
+html[data-theme="night"] .overview-page .business-health-card h3,
+html[data-theme="night"] .overview-page .business-health-card strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .overview-page .business-health-card p,
+html[data-theme="night"] .overview-page .business-health-card span {
+  color: #b7c3d5 !important;
+}
+
+
+/* Financial metric values */
+
+html[data-theme="night"] .overview-page .metric-card strong,
+html[data-theme="night"] .overview-page .financial-card strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .overview-page .metric-card h3,
+html[data-theme="night"] .overview-page .metric-card h4 {
+  color: #b7c3d5 !important;
+}
+
+
+/* Overview lower sections */
+
+html[data-theme="night"] .overview-page .risk-intelligence-card,
+html[data-theme="night"] .overview-page .detected-issues-card,
+html[data-theme="night"] .overview-page .action-plan-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .overview-page .risk-intelligence-card *,
+html[data-theme="night"] .overview-page .detected-issues-card *,
+html[data-theme="night"] .overview-page .action-plan-card * {
+  color: inherit;
+}
+
+
+/* ============================================================
+   NIGHT — RISK
+   ============================================================ */
+
+html[data-theme="night"] .risk-page .risk-summary-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+}
+
+
+/* CRITICAL MUST ALWAYS BE RED + VISIBLE */
+
+html[data-theme="night"] .risk-page .critical,
+html[data-theme="night"] .risk-page .risk-level,
+html[data-theme="night"] .risk-page .prediction,
+html[data-theme="night"] .risk-page .prediction-level {
+  color: #ef4444 !important;
+  font-weight: 800 !important;
+}
+
+
+/* Risk driver cards */
+
+html[data-theme="night"] .risk-page .driver-card,
+html[data-theme="night"] .risk-page .risk-driver-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .risk-page .driver-card h3,
+html[data-theme="night"] .risk-page .driver-card strong,
+html[data-theme="night"] .risk-page .risk-driver-card h3,
+html[data-theme="night"] .risk-page .risk-driver-card strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .risk-page .driver-card p,
+html[data-theme="night"] .risk-page .risk-driver-card p {
+  color: #b7c3d5 !important;
+}
+
+
+/* ============================================================
+   NIGHT — TRANSACTIONS
+   ============================================================ */
+
+html[data-theme="night"] .transactions-page .transactions-table-card,
+html[data-theme="night"] .transactions-page .transactions-table,
+html[data-theme="night"] .transactions-page .table-container,
+html[data-theme="night"] .transactions-page .transactions-content {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .transactions-page table {
+  background: #101a2b !important;
+  color: #f5f7fb !important;
+}
+
+html[data-theme="night"] .transactions-page thead,
+html[data-theme="night"] .transactions-page thead tr {
+  background: #132036 !important;
+}
+
+html[data-theme="night"] .transactions-page th {
+  color: #b7c3d5 !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .transactions-page td {
+  color: #f5f7fb !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .transactions-page input,
+html[data-theme="night"] .transactions-page select {
+  background: #101a2b !important;
+  color: #f5f7fb !important;
+  border-color: #3c506d !important;
+}
+
+
+/* ============================================================
+   NIGHT — ANALYTICS
+   ============================================================ */
+
+html[data-theme="night"] .analytics-page .chart-card,
+html[data-theme="night"] .analytics-page .analytics-card,
+html[data-theme="night"] .analytics-page .metric-card,
+html[data-theme="night"] .analytics-page .stat-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+}
+
+html[data-theme="night"] .analytics-page .chart-card h2,
+html[data-theme="night"] .analytics-page .chart-card h3,
+html[data-theme="night"] .analytics-page .analytics-card h2,
+html[data-theme="night"] .analytics-page .analytics-card h3 {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .analytics-page .chart-card p,
+html[data-theme="night"] .analytics-page .analytics-card p {
+  color: #b7c3d5 !important;
+}
+
+
+/* Recharts */
+
+html[data-theme="night"] .analytics-page
+.recharts-cartesian-axis-tick-value {
+  fill: #8b9ab0 !important;
+}
+
+html[data-theme="night"] .analytics-page
+.recharts-cartesian-grid line {
+  stroke: #293a53 !important;
+}
+
+
+/* ============================================================
+   NIGHT — WHAT IF
+   ============================================================ */
+
+html[data-theme="night"] .what-if-page .scenario-input-card,
+html[data-theme="night"] .what-if-page .input-card,
+html[data-theme="night"] .what-if-page .scenario-card,
+html[data-theme="night"] .what-if-page .result-card,
+html[data-theme="night"] .what-if-page .metric-card,
+html[data-theme="night"] .what-if-page .simulator-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+  color: #f5f7fb !important;
+}
+
+html[data-theme="night"] .what-if-page .scenario-input-card h2,
+html[data-theme="night"] .what-if-page .scenario-input-card h3,
+html[data-theme="night"] .what-if-page .input-card h3,
+html[data-theme="night"] .what-if-page .scenario-card h2,
+html[data-theme="night"] .what-if-page .scenario-card h3,
+html[data-theme="night"] .what-if-page .result-card h2,
+html[data-theme="night"] .what-if-page .result-card h3 {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .what-if-page .scenario-input-card p,
+html[data-theme="night"] .what-if-page .input-card p,
+html[data-theme="night"] .what-if-page .scenario-card p {
+  color: #b7c3d5 !important;
+}
+
+html[data-theme="night"] .what-if-page input {
+  background: #101a2b !important;
+  color: #ffffff !important;
+  border-color: #3c506d !important;
+}
+
+html[data-theme="night"] .what-if-page .result-card strong,
+html[data-theme="night"] .what-if-page .result-card .value {
+  color: #ffffff !important;
+}
+
+
+/* ============================================================
+   NIGHT — AI ADVISOR
+   ============================================================ */
+
+html[data-theme="night"] .ai-advisor-page .ai-hero,
+html[data-theme="night"] .ai-advisor-page .ai-financial-card,
+html[data-theme="night"] .ai-advisor-page .ai-insight-card,
+html[data-theme="night"] .ai-advisor-page .ai-panel,
+html[data-theme="night"] .ai-advisor-page .recommendation-card,
+html[data-theme="night"] .ai-advisor-page .ai-explanation-card {
+  background: #101a2b !important;
+  border-color: #293a53 !important;
+  color: #f5f7fb !important;
+}
+
+html[data-theme="night"] .ai-advisor-page
+.ai-section-heading h2,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-panel-heading h2,
+
+html[data-theme="night"] .ai-advisor-page
+.recommendation-title h2,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-explanation-header h2,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-insight-card h2 {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .ai-advisor-page
+.ai-section-heading span,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-panel-heading span,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-insight-card p,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-explanation-card p,
+
+html[data-theme="night"] .ai-advisor-page
+.recommendation-card p {
+  color: #b7c3d5 !important;
+}
+
+html[data-theme="night"] .ai-advisor-page
+.ai-financial-card strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .ai-advisor-page
+.ai-financial-card span,
+
+html[data-theme="night"] .ai-advisor-page
+.ai-financial-card small {
+  color: #b7c3d5 !important;
+}
+
+
+/* Explanation inner cards */
+
+html[data-theme="night"] .ai-advisor-page
+.ai-explanation-card strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="night"] .ai-advisor-page
+.ai-explanation-card p {
+  color: #b7c3d5 !important;
+}
+
+
+/* ============================================================
+   NIGHT — WHITE BUTTONS / CONTAINERS
+   ============================================================ */
+
+html[data-theme="night"] .refresh-button,
+html[data-theme="night"] .download-button,
+html[data-theme="night"] .date-button,
+html[data-theme="night"] .filter-button {
+  background: #101a2b !important;
+  color: #ffffff !important;
+  border-color: #3c506d !important;
+}
+
+
+/* ============================================================
+   NIGHT — LINKS
+   ============================================================ */
+
+html[data-theme="night"] .page a,
+html[data-theme="night"] .overview-page a,
+html[data-theme="night"] .risk-page a,
+html[data-theme="night"] .transactions-page a,
+html[data-theme="night"] .analytics-page a,
+html[data-theme="night"] .what-if-page a,
+html[data-theme="night"] .ai-advisor-page a {
+  color: #60a5fa !important;
+}
+
+
+/* ============================================================
+   INPUT VISIBILITY
+   ============================================================ */
+
+html[data-theme="night"] input,
+html[data-theme="night"] select,
+html[data-theme="night"] textarea {
+  background: #101a2b !important;
+  color: #ffffff !important;
+  border-color: #3c506d !important;
+}
+
+html[data-theme="night"] input::placeholder,
+html[data-theme="night"] textarea::placeholder {
+  color: #8493a8 !important;
+}
+
+
+/* ============================================================
+   KEEP SIDEBAR DARK
+   ============================================================ */
+
+html[data-theme="night"] .sidebar {
+  background: #080f1d !important;
+}
+
+html[data-theme="night"] .sidebar .nav-item {
+  color: #9fb0c8 !important;
+}
+
+html[data-theme="night"] .sidebar .nav-item.active,
+html[data-theme="night"] .sidebar .nav-item:hover {
+  color: #ffffff !important;
+}
+
+
+/* ============================================================
+   TOGGLE
+   ============================================================ */
+
+.theme-toggle-row {
+  background: #142238 !important;
+  color: #ffffff !important;
+}
+
+.theme-toggle-label span {
+  color: #d8e1ed !important;
+}
+
+
+/* ============================================================
+   SMOOTH TRANSITION
+   ============================================================ */
+
+body,
+.app-shell,
+.main-content,
+.page,
+.card,
+.panel,
+.stat-card,
+.metric-card,
+.chart-card,
+.risk-card,
+.driver-card,
+.transactions-table-card,
+.scenario-card,
+.result-card,
+.ai-panel,
+.ai-insight-card,
+.ai-explanation-card {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
