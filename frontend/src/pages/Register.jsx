@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { saveAuth } from "../auth/auth";
+import "./Auth.css";
 
 const API_URL = "https://merchant-autopilot.onrender.com";
 
@@ -290,3 +291,5 @@ function Register() {
 }
 
 export default Register;
+
+
