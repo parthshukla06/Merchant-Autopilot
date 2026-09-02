@@ -97,7 +97,8 @@ function Register() {
 
   return (
     <div className="auth-page">
-      <div className="auth-brand-panel">
+      <div className="auth-shell">
+        <div className="auth-brand-panel">
         <div className="auth-brand">
           <div className="auth-brand-mark">M</div>
 
@@ -286,10 +287,11 @@ function Register() {
           </p>
         </div>
       </div>
+
+      </div>
     </div>
   );
 }
 
 export default Register;
-
 
