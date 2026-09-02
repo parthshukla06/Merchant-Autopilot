@@ -14693,3 +14693,75 @@ html[data-theme="dark"] .main-content {
 .ai-advisor-page .refresh-button svg {
   flex-shrink: 0 !important;
 }
+/* FINAL SIDEBAR LOGOUT BUTTON */
+.sidebar .sidebar-bottom .sidebar-logout-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  gap: 10px !important;
+  margin: 10px 0 0 !important;
+  padding: 0 13px !important;
+  box-sizing: border-box !important;
+
+  border: 1px solid #2b3a50 !important;
+  border-radius: 9px !important;
+
+  background: #151f30 !important;
+  background-image: none !important;
+  color: #aebbd0 !important;
+
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+
+  text-align: left !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+
+  box-shadow: none !important;
+  opacity: 1 !important;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease !important;
+}
+
+.sidebar .sidebar-bottom .sidebar-logout-button:hover {
+  background: #1c2b40 !important;
+  border-color: #3a4d68 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+}
+
+.sidebar .sidebar-bottom .sidebar-logout-button:active {
+  transform: translateY(0) !important;
+}
+
+.sidebar .sidebar-bottom .sidebar-logout-button:focus-visible {
+  outline: 2px solid rgba(105, 118, 217, 0.7) !important;
+  outline-offset: 2px !important;
+}
+
+.sidebar .sidebar-bottom .sidebar-logout-button svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 auto !important;
+}
+
+.sidebar .sidebar-bottom .sidebar-logout-button span {
+  display: inline-block !important;
+  flex: 0 0 auto !important;
+}
+

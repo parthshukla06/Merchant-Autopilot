@@ -111,7 +111,7 @@ function Sidebar() {
 
         <button
           type="button"
-          className="nav-item sidebar-logout"
+          className="sidebar-logout-button"
           onClick={handleLogout}
         >
           <LogOut size={18} />
