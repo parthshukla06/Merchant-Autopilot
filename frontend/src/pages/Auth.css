@@ -452,3 +452,57 @@
     font-size: 27px !important;
   }
 }
+
+/* Login page feature cards */
+.auth-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.auth-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.auth-feature-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.07);
+}
+
+.auth-feature strong,
+.auth-feature span {
+  display: block;
+}
+
+.auth-feature strong {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.auth-feature span {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0.68;
+}
+
+.auth-brand-content .auth-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Keep auth-shell transparent to the shared two-column grid */
+.auth-page > .auth-shell {
+  display: contents;
+}

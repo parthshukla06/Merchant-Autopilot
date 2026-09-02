@@ -67,7 +67,6 @@ function Login() {
       );
 
       saveAuth(response.data.token, response.data.user);
-
       navigate("/", { replace: true });
     } catch (err) {
       setError(
@@ -81,220 +80,206 @@ function Login() {
 
   return (
     <main className="auth-page">
-      <div className="auth-background-glow auth-glow-one" />
-      <div className="auth-background-glow auth-glow-two" />
+      <section className="auth-brand-panel">
+        <div className="auth-brand">
+          <div className="auth-brand-mark">M</div>
 
-      <div className="auth-shell">
-        <section className="auth-brand-panel">
-          <div className="auth-brand-content">
-            <div className="auth-logo">
-              <div className="auth-logo-mark">M</div>
+          <div>
+            <strong>Merchant</strong>
+            <span>Autopilot</span>
+          </div>
+        </div>
 
-              <div className="auth-logo-text">
-                <strong>Merchant</strong>
-                <span>Autopilot</span>
+        <div className="auth-brand-content">
+          <span className="auth-kicker">
+            <Sparkles size={15} />
+            AI-POWERED MERCHANT INTELLIGENCE
+          </span>
+
+          <h1>
+            Make smarter
+            <span>merchant decisions.</span>
+          </h1>
+
+          <p>
+            Monitor business risk, simulate decisions and turn
+            merchant data into actionable intelligence.
+          </p>
+
+          <div className="auth-feature-list">
+            <div className="auth-feature">
+              <div className="auth-feature-icon">
+                <ShieldCheck size={18} />
+              </div>
+
+              <div>
+                <strong>ML-powered risk intelligence</strong>
+                <span>
+                  Identify financial and operational risks early.
+                </span>
               </div>
             </div>
 
-            <div className="auth-eyebrow">
-              <Sparkles size={15} />
-              AI-POWERED MERCHANT INTELLIGENCE
+            <div className="auth-feature">
+              <div className="auth-feature-icon">
+                <BarChart3 size={18} />
+              </div>
+
+              <div>
+                <strong>Scenario-based decision analysis</strong>
+                <span>
+                  Understand the impact before taking action.
+                </span>
+              </div>
             </div>
 
-            <h1>
-              Make smarter
-              <span>merchant decisions.</span>
-            </h1>
-
-            <p className="auth-brand-description">
-              Monitor business risk, simulate decisions and turn
-              merchant data into actionable intelligence.
-            </p>
-
-            <div className="auth-feature-list">
-              <div className="auth-feature">
-                <div className="auth-feature-icon">
-                  <ShieldCheck size={18} />
-                </div>
-
-                <div>
-                  <strong>ML-powered risk intelligence</strong>
-                  <span>
-                    Identify financial and operational risks early.
-                  </span>
-                </div>
+            <div className="auth-feature">
+              <div className="auth-feature-icon">
+                <BrainCircuit size={18} />
               </div>
 
-              <div className="auth-feature">
-                <div className="auth-feature-icon">
-                  <BarChart3 size={18} />
-                </div>
-
-                <div>
-                  <strong>Scenario-based decision analysis</strong>
-                  <span>
-                    Understand the impact before taking action.
-                  </span>
-                </div>
-              </div>
-
-              <div className="auth-feature">
-                <div className="auth-feature-icon">
-                  <BrainCircuit size={18} />
-                </div>
-
-                <div>
-                  <strong>AI-powered business recommendations</strong>
-                  <span>
-                    Convert merchant data into practical actions.
-                  </span>
-                </div>
+              <div>
+                <strong>AI-powered business recommendations</strong>
+                <span>
+                  Convert merchant data into practical actions.
+                </span>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="auth-brand-footer">
-            <span>Merchant Autopilot</span>
-            <span>Decision Intelligence Platform</span>
+        <div className="auth-panel-footer">
+          <span>Merchant Autopilot</span>
+          <span>Decision Intelligence Platform</span>
+        </div>
+      </section>
+
+      <section className="auth-form-panel">
+        <div className="auth-form-wrap">
+          <div className="auth-heading">
+            <span>WELCOME BACK</span>
+            <h2>Sign in to your workspace</h2>
+            <p>Access your merchant intelligence dashboard.</p>
           </div>
-        </section>
 
-        <section className="auth-form-panel">
-          <div className="auth-form-wrapper">
-            <div className="auth-mobile-logo">
-              <div className="auth-logo-mark">M</div>
+          {error && (
+            <div className="auth-error">
+              <div className="auth-error-dot" />
+              <span>{error}</span>
+            </div>
+          )}
 
-              <div className="auth-logo-text">
-                <strong>Merchant</strong>
-                <span>Autopilot</span>
+          <form onSubmit={handleSubmit}>
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="email">
+                Email address
+              </label>
+
+              <div className="auth-input">
+                <Mail size={18} />
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                />
               </div>
             </div>
 
-            <div className="auth-form-header">
-              <div className="auth-small-label">
-                WELCOME BACK
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="password">
+                Password
+              </label>
+
+              <div className="auth-input">
+                <LockKeyhole size={18} />
+
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                />
+
+                <button
+                  type="button"
+                  className="auth-eye"
+                  onClick={() =>
+                    setShowPassword((prev) => !prev)
+                  }
+                  aria-label={
+                    showPassword
+                      ? "Hide password"
+                      : "Show password"
+                  }
+                >
+                  {showPassword ? (
+                    <EyeOff size={18} />
+                  ) : (
+                    <Eye size={18} />
+                  )}
+                </button>
               </div>
-
-              <h2>Sign in to your workspace</h2>
-
-              <p>
-                Access your merchant intelligence dashboard.
-              </p>
-            </div>
-
-            {error && (
-              <div className="auth-error">
-                <div className="auth-error-dot" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="auth-form">
-              <div className="auth-field">
-                <label htmlFor="email">Email address</label>
-
-                <div className="auth-input-wrapper">
-                  <Mail size={18} />
-
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="you@company.com"
-                    autoComplete="email"
-                  />
-                </div>
-              </div>
-
-              <div className="auth-field">
-                <label htmlFor="password">Password</label>
-
-                <div className="auth-input-wrapper">
-                  <LockKeyhole size={18} />
-
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    value={form.password}
-                    onChange={handleChange}
-                    placeholder="Enter your password"
-                    autoComplete="current-password"
-                  />
-
-                  <button
-                    type="button"
-                    className="auth-password-toggle"
-                    onClick={() =>
-                      setShowPassword((prev) => !prev)
-                    }
-                  >
-                    {showPassword ? (
-                      <EyeOff size={18} />
-                    ) : (
-                      <Eye size={18} />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="auth-submit-button"
-                disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <span className="auth-spinner" />
-                    Signing in...
-                  </>
-                ) : (
-                  <>
-                    Sign in
-                    <ArrowRight size={18} />
-                  </>
-                )}
-              </button>
-            </form>
-
-            <div className="auth-divider">
-              <span>OR</span>
             </div>
 
             <button
-              type="button"
-              className="auth-demo-button"
-              onClick={useDemoAccount}
+              type="submit"
+              className="auth-submit"
+              disabled={loading}
             >
-              <CheckCircle2 size={18} />
-
-              <span>
-                <strong>Use Demo Account</strong>
-                <small>Instantly load demo credentials</small>
-              </span>
+              {loading ? (
+                "Signing in..."
+              ) : (
+                <>
+                  Sign in
+                  <ArrowRight size={18} />
+                </>
+              )}
             </button>
+          </form>
 
-            <div className="auth-switch">
-              <span>Don't have an account?</span>
-
-              <Link to="/register">
-                Create account
-                <ArrowRight size={15} />
-              </Link>
-            </div>
-
-            <div className="auth-security-note">
-              <ShieldCheck size={16} />
-
-              <span>
-                Your account is protected with secure authentication.
-              </span>
-            </div>
+          <div className="auth-divider">
+            <span>OR</span>
           </div>
-        </section>
-      </div>
+
+          <button
+            type="button"
+            className="auth-demo"
+            onClick={useDemoAccount}
+          >
+            <CheckCircle2 size={18} />
+
+            <span>
+              <strong>Use Demo Account</strong>
+              <small>Instantly load demo credentials</small>
+            </span>
+          </button>
+
+          <div className="auth-register">
+            <span>Don't have an account?</span>
+
+            <Link to="/register">
+              Create account
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+
+          <div className="auth-security">
+            <ShieldCheck size={16} />
+
+            <span>
+              Your account is protected with secure authentication.
+            </span>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
